@@ -34,7 +34,7 @@ jobs:
             --health-interval=30s \
             --health-timeout=10s \
             --health-retries=3 \
-            epictech
+            wyandotte-robotics
 
       # Step 5: Clean Up Old Docker Images
       - name: Remove Unused Docker Images
