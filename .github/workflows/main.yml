@@ -17,11 +17,13 @@ jobs:
       - name: Build Docker Image
         run: docker build -t wyandotte-robotics .
 
-      # Step 3: Stop and Remove Existing Container
-      - name: Stop Existing Container
+      # Step 3: Stop and Remove Existing Container (Robust Cleanup)
+      - name: Stop and Remove Existing Container
         run: |
-          docker stop wyandotte-robotics || true
-          docker rm wyandotte-robotics || true
+          if [ "$(docker ps -aq -f name=wyandotte-robotics)" ]; then
+            docker stop wyandotte-robotics || true
+            docker rm wyandotte-robotics || true
+          fi
 
       # Step 4: Run New Container with Health Check and Restart Policy
       - name: Run New Container with Health Check
