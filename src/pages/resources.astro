@@ -1,0 +1,342 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import { getPermalink } from '../utils/permalinks';
+
+const metadata = {
+  title: 'Resources',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Resources"
+    image={{
+      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Resources Image',
+    }}
+  >
+    <Fragment slot="title"> Usefule Resoureces </Fragment>
+    <Fragment slot="subtitle">Your Go-To Hub for Team Guides, Training, and Reference Materials </Fragment>
+  </Hero>
+
+  <Features3
+    title="Team Resources"
+    subtitle="Useful team links"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'Facebook',
+        description: 'Our official Facebook page',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Facebook Page',
+          target: '_blank',
+          icon: 'tabler:brand-facebook',
+          href: 'https://www.facebook.com/profile.php?id=61566039357792',
+        },
+      },
+      {
+        title: 'Instagram',
+        description: 'Our offical Instgram',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Instagram',
+          target: '_blank',
+          icon: 'tabler:brand-instagram',
+          href: 'https://www.instagram.com/wyandotterobotics1847/',
+        },
+      },
+      {
+        title: 'Github',
+        description: 'Our offical Github where you can find all of our source code',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Github',
+          target: '_blank',
+          icon: 'tabler:brand-github',
+          href: 'https://github.com/FRCTeam1847',
+        },
+      },
+      {
+        title: 'Mailing list',
+        description:
+          'Our offical mailing list sending out announcements on meetings, compeitions and reminders for students.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Mailing list',
+          //target: '_blank',
+          icon: 'tabler:mail',
+          href: getPermalink('/signup'),
+        },
+      },
+    ]}
+  />
+  <Features3
+    title="Competition Resources"
+    subtitle="Useful team links"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'The Blue Alliance',
+        description: 'The Blue Alliance provides event, team, and ranking infomation for FRC',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://thebluealliance.com',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Statbotics.io',
+        description: 'Provides ranking information for all teams based off Expected Points Added (EPA)',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.statbotics.io/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+    ]}
+  />
+  <Features3
+    title="Resources From Other Teams"
+    subtitle="Useful team links"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: '2024 massive mini',
+        description: 'Massive mini this year. Resources are in the **Find all presentations and documents here** link',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://sites.google.com/lps53.org/massivemini24/home',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Spectrum 3847',
+        description: 'Spectrum 3847 has a lot of resources that are very useful',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.spectrum3847.org/resources',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'FRCDesign.org',
+        description:
+          'FRC Design has a lot of useful informatoin. Specifically a collection of FRC Designs that you can view in OnShape',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.frcdesign.org/mechanism-examples/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+    ]}
+  />
+  <Features3
+    title="Programing Resources"
+    subtitle="Useful links for programmers as well as libraries we find useful"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'FIRST Robotics Competition Control System',
+        description:
+          'FIRST® Robotics Competition Control System Documentation! This site contains everything you need to know for programming a competition robot! Note: we use the Java programming language.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://docs.wpilib.org/en/stable/index.html',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Rev Robotics C++ and Java Installation/Docs',
+        description:
+          'A good resource for rev robotics docs. Link takes you to where you can get the url to install the library for development.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://docs.revrobotics.com/ion-control-system/sw/revlib#c-and-java-installation',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'CTRE Phoenix Software',
+        description: 'Documentation and download links for CTRE devices like Kraken x60.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://docs.ctr-electronics.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Yet Another Generic Swerve Library(YAGSL)',
+        description: 'We used this library in the offseason of 2024 allowing us to implement swerve with ease.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://yagsl.gitbook.io/yagsl',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Path Planner',
+        description: 'Useful tool for making auto paths easier to implement through a GUI.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://pathplanner.dev/home.html',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+    ]}
+  />
+  <Features3
+    title="Parts"
+    subtitle="These are sites we have gotten parts from"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'AndyMark',
+        description:
+          'AndyMark, Inc. is a leading provider of mechanical and electrical components for robotics, supporting education and competitive programs like FIRST with innovative products, resources, and expertise.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.andymark.com',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Rev Robotics',
+        description:
+          'REV Robotics, established in 2014, is a prominent robotics company that develops innovative mechanical, electrical, and software solutions to empower students and teams in educational and competitive robotics programs like FIRST.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.revrobotics.com',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Cross The Road Electronics (CTRE)',
+        description:
+          'Cross The Road Electronics (CTRE), founded in 2006, specializes in developing embedded control systems for robotics and propulsion applications, offering products like motor controllers, sensors, and software frameworks widely utilized in educational and competitive robotics, including FIRST Robotics competitions.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://newsite.ctr-electronics.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'West Coast Products',
+        description:
+          'WestCoast Products is a premier supplier of high-performance robotics components, including gearboxes, wheels, and motors, designed to enhance the capabilities of competitive robotics teams, especially in the FIRST Robotics Competition.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://wcproducts.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'McMAster-CARR',
+        description:
+          'McMaster-Carr is a vital resource for FRC teams, providing a vast selection of components such as fasteners, raw materials, and mechanical parts essential for robot design and construction. Their extensive inventory and prompt shipping enable teams to efficiently acquire necessary materials throughout the build season.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.mcmaster.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Thriftybot',
+        description:
+          'The Thrifty Bot is a company dedicated to providing affordable, high-quality components for FIRST Robotics Competition (FRC) teams, offering a range of products including swerve modules, telescoping tube kits, and vectored intake wheels to enhance robot performance.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.thethriftybot.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Swerve Drive Specialties',
+        description:
+          'Swerve Drive Specialties (SDS) is a premier provider of high-performance swerve drive modules, offering innovative solutions and comprehensive support for teams in the FIRST Robotics Competition.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.swervedrivespecialties.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'VEX Robotics',
+        description:
+          'VEX Robotics is a leading provider of educational robotics solutions, offering accessible and scalable platforms that promote STEM learning through hands-on experiences and competitions for students from elementary school to university levels.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.vexrobotics.com/pro',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'SendCutSend',
+        description:
+          'SendCutSend provides FRC teams with fast, affordable custom part manufacturing, including laser cutting, bending, and finishing services, to streamline robot fabrication.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://sendcutsend.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'RoboPromo',
+        description:
+          'RoboPromo specializes in providing high-quality bumper materials, numbers, and accessories tailored for FIRST Robotics Competition (FRC) teams, offering products like reversible bumper fabrics, iron-on numbers, and mounting brackets to enhance robot aesthetics and compliance.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.robopromo.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+    ]}
+  />
+</Layout>

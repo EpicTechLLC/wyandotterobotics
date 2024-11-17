@@ -1,9 +1,19 @@
+import { getPermalink } from './utils/permalinks';
+
 export const headerData = {
   links: [
-    // {
-    // 	text: 'Home',
-    // 	href: '/',
-    // },
+    {
+      text: 'Home',
+      href: '/',
+    },
+    {
+      text: 'Resources',
+      href: getPermalink('/resources'),
+    },
+	{
+		text: 'Mailing List',
+		href: getPermalink('/signup'),
+	  },
     // {
     // 	text: 'About',
     // 	href: getPermalink('/about'),
