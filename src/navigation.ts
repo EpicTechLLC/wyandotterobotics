@@ -7,17 +7,17 @@ export const headerData = {
       href: '/',
     },
     {
+      text: 'About',
+      href: getPermalink('/about'),
+    },
+    {
       text: 'Resources',
       href: getPermalink('/resources'),
     },
-	{
-		text: 'Mailing List',
-		href: getPermalink('/signup'),
-	  },
-    // {
-    // 	text: 'About',
-    // 	href: getPermalink('/about'),
-    // },
+    {
+      text: 'Mailing List',
+      href: getPermalink('/signup'),
+    },
     // {
     // 	text: 'Contact',
     // 	href: getPermalink('/contact'),
