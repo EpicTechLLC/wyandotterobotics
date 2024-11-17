@@ -11,7 +11,7 @@ metadata:
   title:
     default: Wyandotte Robotics
     template: '%s — Wyandotte Robotics'
-  description: 'Wyandotte Robotics aka WRATH'
+  description: 'Wyandotte Robotics-WRATH'
   robots:
     index: true
     follow: true
