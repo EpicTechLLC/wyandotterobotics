@@ -19,6 +19,11 @@ export const headerData = {
       href: getPermalink('/events'),
     },
     {
+      text: 'Gallery',
+      href: getPermalink('/gallery'),
+    },
+
+    {
       text: 'Mailing List',
       href: getPermalink('/signup'),
     },
