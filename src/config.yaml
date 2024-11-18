@@ -1,6 +1,6 @@
 site:
   name: Wyandotte Robotics
-  site: 'https://astrowind.vercel.app'
+  site: 'https://wyandotterobotics.epictech.app'
   base: '/'
   trailingSlash: false
 
