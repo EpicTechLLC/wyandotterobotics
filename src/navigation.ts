@@ -18,10 +18,10 @@ export const headerData = {
       text: 'Events',
       href: getPermalink('/events'),
     },
-    {
-      text: 'Gallery',
-      href: getPermalink('/gallery'),
-    },
+    // {
+    //   text: 'Gallery',
+    //   href: getPermalink('/gallery'),
+    // },
 
     {
       text: 'Mailing List',
