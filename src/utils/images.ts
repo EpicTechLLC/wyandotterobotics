@@ -50,65 +50,67 @@ export const findImage = async (
 
 /** */
 export const adaptOpenGraphImages = async (
-	openGraph: OpenGraph = {},
-	astroSite: URL | undefined = new URL(import.meta.env.SITE)
-  ): Promise<OpenGraph> => {
-	if (!openGraph?.images?.length) {
-	  return openGraph;
-	}
-  
-	const images = openGraph.images;
-	const defaultWidth = 1200;
-	const defaultHeight = 626;
-  
-	const adaptedImages = await Promise.all(
-	  images.map(async (image) => {
-		if (image?.url) {
-		  const resolvedImage = (await findImage(image.url)) as ImageMetadata | string | undefined;
-		  if (!resolvedImage) {
-			return {
-			  url: '',
-			};
-		  }
-  
-		  let _image;
-  
-		  if (
-			typeof resolvedImage === 'string' &&
-			(resolvedImage.startsWith('http://') || resolvedImage.startsWith('https://')) &&
-			isUnpicCompatible(resolvedImage)
-		  ) {
-			_image = (await unpicOptimizer(resolvedImage, [defaultWidth], defaultWidth, defaultHeight, 'jpg'))[0];
-		  } else if (resolvedImage) {
-			const dimensions =
-			  typeof resolvedImage !== 'string' && resolvedImage?.width <= defaultWidth
-				? [resolvedImage?.width, resolvedImage?.height]
-				: [defaultWidth, defaultHeight];
-			_image = (
-			  await astroAsseetsOptimizer(resolvedImage, [dimensions[0]], dimensions[0], dimensions[1], 'jpg')
-			)[0];
-		  }
-  
-		  if (typeof _image === 'object') {
-			return {
-			  url: 'src' in _image && typeof _image.src === 'string'
-				? new URL(_image.src.replace('/src/', '/'), astroSite).href
-				: '',
-			  width: 'width' in _image && typeof _image.width === 'number' ? _image.width : undefined,
-			  height: 'height' in _image && typeof _image.height === 'number' ? _image.height : undefined,
-			};
-		  }
-		  return {
-			url: '',
-		  };
-		}
-  
-		return {
-		  url: '',
-		};
-	  })
-	);
-  
-	return { ...openGraph, ...(adaptedImages ? { images: adaptedImages } : {}) };
-  };
-  
+  openGraph: OpenGraph = {},
+  astroSite: URL | undefined = new URL(import.meta.env.SITE)
+): Promise<OpenGraph> => {
+  if (!openGraph?.images?.length) {
+    return openGraph;
+  }
+
+  const images = openGraph.images;
+  const defaultWidth = 1200;
+  const defaultHeight = 626;
+
+  const adaptedImages = await Promise.all(
+    images.map(async (image) => {
+      if (image?.url) {
+        const resolvedImage = (await findImage(image.url)) as ImageMetadata | string | undefined;
+        if (!resolvedImage) {
+          return {
+            url: '',
+          };
+        }
+
+        let _image;
+
+        if (
+          typeof resolvedImage === 'string' &&
+          (resolvedImage.startsWith('http://') || resolvedImage.startsWith('https://')) &&
+          isUnpicCompatible(resolvedImage)
+        ) {
+          _image = (await unpicOptimizer(resolvedImage, [defaultWidth], defaultWidth, defaultHeight, 'jpg'))[0];
+        } else if (resolvedImage) {
+          const dimensions =
+            typeof resolvedImage !== 'string' && resolvedImage?.width <= defaultWidth
+              ? [resolvedImage?.width, resolvedImage?.height]
+              : [defaultWidth, defaultHeight];
+          _image = (
+            await astroAsseetsOptimizer(resolvedImage, [dimensions[0]], dimensions[0], dimensions[1], 'jpg')
+          )[0];
+        }
+
+        if (typeof _image === 'object') {
+          const src = 'src' in _image && typeof _image.src === 'string' ? _image.src : '';
+          const normalizedSrc = src.startsWith('/src/')
+            ? src.replace('/src/', '/') // Convert `/src/` to `/`
+            : src;
+
+          return {
+            url: new URL(normalizedSrc, astroSite).href,
+            width: 'width' in _image && typeof _image.width === 'number' ? _image.width : undefined,
+            height: 'height' in _image && typeof _image.height === 'number' ? _image.height : undefined,
+          };
+        }
+        return {
+          url: '',
+        };
+      }
+
+      return {
+        url: '',
+      };
+    })
+  );
+
+  return { ...openGraph, ...(adaptedImages ? { images: adaptedImages } : {}) };
+};
