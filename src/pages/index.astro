@@ -2,10 +2,9 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
-
-import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features3 from '~/components/widgets/Features3.astro';
 
 const metadata = {
   title: 'Wyandotte Robotics',
@@ -35,17 +34,18 @@ const metadata = {
       { title: 'Seasons Competed', amount: new Date().getFullYear() - 2006 },
       { title: 'Off season events', amount: 8 },
       { title: 'Sponsors', amount: 5 },
-      { title: 'Mentors', amount: '4' },
+      { title: 'Mentors', amount: 4 },
     ]}
   />
 
   <!-- FAQs Widget *******************  -->
 
-  <FAQs
+  <Features3
     title="Frequently Asked Questions"
     subtitle="Explore the questions below to learn more about our robotics team and discover how joining us can elevate your journey in STEM and engineering."
     tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
+    defaultIcon="tabler:point-filled"
+    columns={3}
     items={[
       {
         title: 'What is Wyandotte Robotics?',
@@ -94,14 +94,14 @@ const metadata = {
           'Wyandotte Robotics is funded through a combination of school support, sponsorships from local businesses, grants, and fundraising activities organized by team members and their families. These funds cover materials, competition fees, travel expenses, and other operational costs.',
       },
       {
-        title: 'How can I support Wyandotte Robotics?',
-        description:
-          'You can support us by:<br />- <strong>Becoming a Sponsor:</strong> Financial contributions help us purchase materials and cover competition fees.<br />- <strong>Donating Materials or Services:</strong> In-kind donations are greatly appreciated.<br />- <strong>Volunteering as a Mentor:</strong> Share your expertise in engineering, programming, marketing, or project management.<br />- <strong>Attending Our Events:</strong> Cheer us on at competitions or community outreach events.<br />- <strong>Spreading the Word:</strong> Follow us on social media and share our mission with others.<br /><br />Contact us through our website for more details on how you can help.',
-      },
-      {
         title: 'What is the mission of Wyandotte Robotics?',
         description:
           'Our mission is to inspire young people to become leaders in science, technology and their community by engaging them in exciting, mentor-based programs. We aim to build STEM skills, foster innovation, and develop essential life capabilities such as self-confidence, communication, and leadership.',
+      },
+      {
+        title: 'How can I support Wyandotte Robotics?',
+        description:
+          'You can support us by:<br />- <strong>Becoming a Sponsor:</strong> Financial contributions help us purchase materials and cover competition fees.<br />- <strong>Donating Materials or Services:</strong> In-kind donations are greatly appreciated.<br />- <strong>Volunteering as a Mentor:</strong> Share your expertise in engineering, programming, marketing, or project management.<br />- <strong>Attending Our Events:</strong> Cheer us on at competitions or community outreach events.<br />- <strong>Spreading the Word:</strong> Follow us on social media and share our mission with others.<br /><br />Contact us through our website for more details on how you can help.',
       },
     ]}
   />
