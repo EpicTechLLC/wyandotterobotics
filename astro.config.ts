@@ -28,6 +28,7 @@ export default defineConfig({
   experimental: {
     contentCollectionCache: true, // Enable Incremental Content Caching
   },
+  cacheDir: '.astro/cache',
   integrations: [
     tailwind({
       applyBaseStyles: false,
