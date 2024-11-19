@@ -1,9 +1,10 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-const pdfUrl = import.meta.glob('/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf', { eager: true })[
-  '/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf'
-].default;
-
+const pdfs: Record<string, { default: string }> = import.meta.glob(
+  '/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf',
+  { eager: true }
+);
+const pdfUrl = pdfs['/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf'].default;
 const metadata = {
   title: 'Wyandotte Robotics - Branding',
   ignoreTitleTemplate: true,
@@ -11,14 +12,11 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-	<div class="layout">
-		<main class="flex-grow">
-			<iframe src={pdfUrl} class="signup-iframe" tabindex="0">
-			Your browser does not support iframes.
-		  </iframe>
-		</main>
-	  </div>
-  
+  <div class="layout">
+    <main class="flex-grow">
+      <iframe src={pdfUrl} class="signup-iframe" tabindex="0"> Your browser does not support iframes. </iframe>
+    </main>
+  </div>
 </Layout>
 
 <style>
