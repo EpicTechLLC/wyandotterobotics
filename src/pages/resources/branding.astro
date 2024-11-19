@@ -1,0 +1,47 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+const pdfUrl = import.meta.glob('/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf', { eager: true })[
+  '/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf'
+].default;
+
+const metadata = {
+  title: 'Wyandotte Robotics - Branding',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+	<div class="layout">
+		<main class="flex-grow">
+			<iframe src={pdfUrl} class="signup-iframe" tabindex="0">
+			Your browser does not support iframes.
+		  </iframe>
+		</main>
+	  </div>
+  
+</Layout>
+
+<style>
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+  }
+
+  main {
+    flex-grow: 1; /* Take up all available space */
+  }
+
+  .signup-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>

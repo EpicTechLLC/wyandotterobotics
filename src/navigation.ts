@@ -17,6 +17,10 @@ export const headerData = {
           text: 'Team Resources',
 		  href: getPermalink('/resources'),
         },
+		{
+			text: 'Branding',
+			href: getPermalink('/resources/branding'),
+		  },
       ],
     },
     {
