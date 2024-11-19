@@ -12,7 +12,12 @@ export const headerData = {
     },
     {
       text: 'Resources',
-      href: getPermalink('/resources'),
+      links: [
+        {
+          text: 'Team Resources',
+		  href: getPermalink('/resources'),
+        },
+      ],
     },
     {
       text: 'Events',
