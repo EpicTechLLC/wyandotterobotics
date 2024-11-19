@@ -13,14 +13,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Step 2: Build the Docker Image
+      # Step 2: Cache Astro Build Cache
+      - name: Cache Astro Build Cache
+        uses: actions/cache@v3
+        with:
+          path: .astro/cache
+          key: astro-cache-${{ github.sha }}
+          restore-keys: |
+            astro-cache-
+
+      # Step 3: Build the Docker Image
       - name: Build Docker Image
         run: |
           echo "Building Docker image..."
           docker build -t wyandotte-robotics .
           echo "Docker image built successfully!"
 
-      # Step 3: Stop and Remove Existing Container
+      # Step 4: Stop and Remove Existing Container
       - name: Stop and Remove Existing Container
         run: |
           echo "Stopping and removing existing container..."
@@ -34,7 +43,7 @@ jobs:
           fi
           echo "Existing container stopped and removed!"
 
-      # Step 4: Run New Container with Health Check and Restart Policy
+      # Step 5: Run New Container with Health Check and Restart Policy
       - name: Run New Container with Health Check
         run: |
           echo "Running new container..."
@@ -49,7 +58,7 @@ jobs:
             wyandotte-robotics
           echo "New container started successfully!"
 
-      # Step 5: Clean Up Old Docker Images
+      # Step 6: Clean Up Old Docker Images
       - name: Remove Unused Docker Images
         run: |
           echo "Cleaning up unused Docker images..."
