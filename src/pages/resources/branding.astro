@@ -8,15 +8,19 @@ const pdfs: Record<string, { default: string }> = import.meta.glob(
   { eager: true }
 );
 const pdfUrl = pdfs['/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf'].default;
-const images = import.meta.glob<Record<string, { default: string }>>('/src/assets/images/branding/*.png', {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const images = import.meta.glob<Record<string, { default: any }>>('/src/assets/images/branding/*.png', {
   eager: true,
 });
 
-const imageEntries = Object.entries(images).map(([path, module]) => ({
-  path,
-  url: module.default,
-  name: path.split('/').pop(), // Extract the file name
-}));
+const imageEntries = Object.entries(images).map(([path, module]) => {
+  const defaultValue = module.default as unknown as { src: string };
+  return {
+    path,
+    url: defaultValue.src,
+    name: path.split('/').pop(), // Extract the file name
+  };
+});
 const imageLinks: Item[] = imageEntries.map((image) => {
   return {
     title: image.name?.replace(/-/g, ' ').replace('.png', ''),
