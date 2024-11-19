@@ -29,27 +29,19 @@ jobs:
       - name: Build Docker Image with Cache Volume
         run: |
           echo "Building Docker image with mounted cache..."
-          docker build --build-arg CACHE_DIR=/app/.astro/cache -t wyandotte-robotics .
+          docker build --build-arg CACHE_DIR=/app/.astro/cache/assets -t wyandotte-robotics .
 
       # Step 4: Extract .astro/cache
       - name: Extract Astro Cache
         run: |
           echo "Extracting .astro/cache from the Docker container..."
           docker create --name wyandotte-build wyandotte-robotics
-          docker cp wyandotte-build:/app/.astro/cache .astro-cache
+          docker cp wyandotte-build:/app/.astro/cache/assets .astro-cache
           docker rm wyandotte-build
           echo "Astro cache extracted successfully!"
 
-      # Step 4.5: Clean Up Cache Files After Build
-      - name: Clean Up Cache Files After Build
-        run: |
-          echo "Cleaning up unnecessary files from .astro-cache..."
-          rm -rf .astro-cache/temp
-          rm -rf .astro-cache/logs
-          echo "Unnecessary files removed from .astro-cache."
-
       # Step 5: Cache the Astro Build Cache
-      - name: Cache Astro Build Cache
+      - name: Cache Astro Build Cache1
         uses: actions/cache@v3
         with:
          path: .astro-cache
