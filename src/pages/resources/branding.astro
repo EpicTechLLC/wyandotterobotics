@@ -1,10 +1,34 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import Features from '../../components/widgets/Features.astro';
+import type { CallToAction, Item } from '../../types';
+
 const pdfs: Record<string, { default: string }> = import.meta.glob(
   '/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf',
   { eager: true }
 );
 const pdfUrl = pdfs['/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf'].default;
+const images = import.meta.glob<Record<string, { default: string }>>('/src/assets/images/branding/*.png', {
+  eager: true,
+});
+
+const imageEntries = Object.entries(images).map(([path, module]) => ({
+  path,
+  url: module.default,
+  name: path.split('/').pop(), // Extract the file name
+}));
+const imageLinks: Item[] = imageEntries.map((image) => {
+  return {
+    title: image.name?.replace(/-/g, ' ').replace('.png', ''),
+    callToAction: {
+      variant: 'secondary',
+      text: 'Download',
+      href: image.url,
+      target: '_self',
+      download: image.name, // Add the download attribute here
+    } as unknown as CallToAction,
+  } as Item;
+});
 const metadata = {
   title: 'Wyandotte Robotics - Branding',
   ignoreTitleTemplate: true,
@@ -12,34 +36,50 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <div class="layout">
-    <main class="flex-grow">
-      <iframe src={pdfUrl} class="signup-iframe" tabindex="0"> Your browser does not support iframes. </iframe>
-    </main>
+  <div style="flex-grow: 1; height: 75vh;" class="mb-0 object-container">
+    <object
+      data={pdfUrl}
+      type="application/pdf"
+      width="100%"
+      height="100%"
+      aria-labelledby="PDF document"
+      title="Embedded PDF Viewer"
+      class="pdf-viewer"
+    >
+    </object>
   </div>
+
+  <Features
+    title="PDF Files"
+    columns={3}
+    items={[
+      {
+        title: 'Branding Standards PDF',
+        description: 'Our official Branding standards',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Branding Standards',
+          target: '_blank',
+          href: pdfUrl,
+        },
+      },
+    ]}
+  />
+  <Features title="Image Files" subtitle="All image files" columns={3} items={[...(imageLinks as Item[])]} />
 </Layout>
-
 <style>
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .layout {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* Full viewport height */
-  }
-
-  main {
-    flex-grow: 1; /* Take up all available space */
-  }
-
-  .signup-iframe {
-    width: 100%;
+  /* Base styles for the PDF object */
+  .pdf-viewer {
+    width: 75%;
     height: 100%;
     border: none;
+    justify-self: center;
+  }
+
+  /* Hide the PDF viewer on small screens */
+  @media (max-width: 768px) {
+    .object-container {
+      display: none;
+    }
   }
 </style>
