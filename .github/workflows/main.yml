@@ -18,9 +18,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .astro-cache
-          key: astro-cache-${{ hashFiles('.astro-cache/**/*') }}
-          restore-keys: |
-            astro-cache-
+          key: astro-cache-${{ hashFiles('**/package-lock.json') }}
+
 
     #   - name: Move Restored Cache
     #     run: mv .astro-cache .astro/cache
@@ -45,9 +44,7 @@ jobs:
         uses: actions/cache@v3
         with:
          path: .astro-cache
-         key: astro-cache-${{ hashFiles('.astro-cache/**/*') }}
-         restore-keys: |
-              astro-cache-
+         key: astro-cache-${{ hashFiles('**/package-lock.json') }}
 
       # Step 6: Stop and Remove Existing Container
       - name: Stop and Remove Existing Container
