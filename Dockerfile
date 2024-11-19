@@ -8,6 +8,13 @@ RUN npm install
 # Copy the application files
 COPY . .
 
+# Pass the Astro cache directory as a build argument
+ARG CACHE_DIR=/app/.astro/cache
+ENV ASTRO_CACHE_DIR=$CACHE_DIR
+
+# Copy the cache directory (if provided)
+COPY --from=cache $CACHE_DIR $CACHE_DIR
+
 # Build the Astro project
 RUN npm run build
 

@@ -22,8 +22,8 @@ jobs:
           restore-keys: |
             astro-cache-
 
-      - name: Move Restored Cache
-        run: mv .astro-cache .astro/cache
+    #   - name: Move Restored Cache
+    #     run: mv .astro-cache .astro/cache
 
       # Step 3: Build the Docker Image
       - name: Build Docker Image with Cache Volume
