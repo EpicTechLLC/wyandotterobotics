@@ -20,9 +20,14 @@ jobs:
           path: .astro-cache
           key: astro-cache-${{ hashFiles('**/package-lock.json') }}
 
-
-    #   - name: Move Restored Cache
-    #     run: mv .astro-cache .astro/cache
+      - name: Prepare Astro Cache Directory
+        run: |
+          if [ ! -d ".astro-cache" ]; then
+             echo ".astro-cache does not exist. Creating it..."
+          mkdir -p .astro-cache
+          else
+             echo ".astro-cache already exists. Skipping creation."
+          fi
 
       # Step 3: Build the Docker Image
       - name: Build Docker Image with Cache Volume
