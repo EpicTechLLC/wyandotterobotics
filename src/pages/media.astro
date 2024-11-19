@@ -15,7 +15,7 @@ const metadata = {
   <Hero>
     <Fragment slot="title"> Media</Fragment>
   </Hero>
-  <div class="mx-auto container max-w-screen-sm grid grid-cols-2 gap-8">
+  <div class="mx-auto container max-w-screen-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 p-4">
     {
       albums.map((item) => (
         <a href={`/media/${item.id}`} class="group transition-all mb-4 block">
