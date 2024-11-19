@@ -18,7 +18,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .astro-cache
-          key: astro-cache-${{ github.sha }}
+          key: astro-cache-${{ hashFiles('.astro-cache/**/*') }}
           restore-keys: |
             astro-cache-
 
@@ -45,7 +45,7 @@ jobs:
         uses: actions/cache@v3
         with:
          path: .astro-cache
-         key: astro-cache-${{ github.sha }}
+         key: astro-cache-${{ hashFiles('.astro-cache/**/*') }}
          restore-keys: |
               astro-cache-
 
