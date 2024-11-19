@@ -4,6 +4,7 @@ export async function getAlbumImages(albumId: string) {
 
   // 2. Filter images by albumId
   images = Object.fromEntries(Object.entries(images).filter(([key]) => key.includes(albumId)));
-  return Object.keys(images).map((image) => image); // "."+ image.split('src')[1]);
 
+  const resolvedImages = await Promise.all(Object.values(images).map((image) => image().then((mod) => mod.default)));
+  return resolvedImages;
 }

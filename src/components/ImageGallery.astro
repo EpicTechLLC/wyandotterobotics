@@ -64,7 +64,7 @@ const { images, albumTitle } = Astro.props;
           return (
             <button
               class="gallery-button mb-4 w-full"
-              data-src={image}
+              data-src={image.src}
               data-width={image.width || 1200}
               data-height={image.height || 800}
             >
