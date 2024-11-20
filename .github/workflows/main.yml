@@ -40,6 +40,7 @@ jobs:
       # Step 6: Extract Astro Cache
       - name: Extract Astro Cache
         run: |
+          rm -rf .astro-cache
           docker create --name wyandotte-build wyandotte-robotics
           docker cp wyandotte-build:/app/.astro/cache .astro-cache
           docker rm wyandotte-build
