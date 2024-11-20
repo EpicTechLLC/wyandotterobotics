@@ -20,9 +20,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .astro-cache
-          key: astro-cache-v1-${{ hashFiles('.astro-cache/**') }}
+          key: astro-cache-${{ hashFiles('src/content/**') }}
           restore-keys: |
-              astro-cache-v1-${{ hashFiles('.astro-cache/**') }}
+              astro-cache-${{ hashFiles('src/content/**') }}
 
       - name: List files
         run: |
