@@ -25,8 +25,7 @@ jobs:
       - name: Debug Build Context
         run: |
           echo "Checking files in build context..."
-          ls -la .astro-cache || echo ".astro-cache not found"
-          ls -la
+          ls -la .astro-cache/.astro-cache || echo ".astro-cache not found"
 
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
