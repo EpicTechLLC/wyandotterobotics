@@ -1,8 +1,13 @@
 FROM node:lts as runtime
 WORKDIR /app
+# Define the cache directory argument
+ARG CACHE_DIR=/app/.astro/cache
 
-# Copy the cache directory from the local machine
-COPY .astro-cache /app/.astro/cache
+# Create the cache directory in the container
+RUN mkdir -p $CACHE_DIR
+
+# Copy the cache directory from the build context
+COPY .astro-cache $CACHE_DIR
 
 # Install dependencies
 COPY package*.json ./
