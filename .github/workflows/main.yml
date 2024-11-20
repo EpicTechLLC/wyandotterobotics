@@ -18,9 +18,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .astro-cache
-          key: astro-cache-${{ hashFiles('**/package-lock.json') }}
+          key: astro-cache-${{ hashFiles('.astro-cache/cache/**') }}
           restore-keys: |
-              astro-cache-${{ hashFiles('**/package-lock.json') }}
+              astro-cache-${{ hashFiles('.astro-cache/cache/**') }}
 
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
@@ -49,9 +49,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .astro-cache
-          key: astro-cache-${{ hashFiles('**/package-lock.json') }}
+          key: astro-cache-${{ hashFiles('.astro-cache/cache/**') }}
           restore-keys: |
-              astro-cache-${{ hashFiles('**/package-lock.json') }}
+              astro-cache-${{ hashFiles('.astro-cache/cache/**') }}
 
       # Step 7: Stop and Remove Existing Container
       - name: Stop and Remove Existing Container
