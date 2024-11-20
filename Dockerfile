@@ -5,6 +5,9 @@ RUN mkdir /app/.astro
 # Copy the cache directory from the build context
 COPY .astro-cache/cache /app/.astro/cache
 
+# Add a cache-busting dummy command
+RUN echo "Cache busting step: $(date +%s)"
+
 # Install dependencies
 COPY package*.json ./
 RUN npm install
