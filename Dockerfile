@@ -4,7 +4,7 @@ WORKDIR /app
 RUN mkdir /app/.astro
 ARG CACHE_BUST=1
 # Copy the cache directory from the build context
-COPY .astro-cache/cache /app/.astro/cache
+COPY .astro-cache /app/.astro/cache
 
 # Add a cache-busting dummy command
 RUN echo "Cache busting step: $(date +%s)"
