@@ -1,10 +1,12 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
+// import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Features3 from '~/components/widgets/Features3.astro';
+import mascot from '../assets/images/1847-round-color.png';
+import Image from '~/components/common/Image.astro';
 
 const metadata = {
   title: 'Wyandotte Robotics',
@@ -13,11 +15,16 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero image={{ src: '~/assets/images/1847-round-color.png', alt: 'Wyandotte Robotics' }}>
-    <Fragment slot="subtitle"> </Fragment>
-  </Hero>
+  <div class="flex items-center justify-center h-1/4">
+    <Image
+      src={mascot}
+      style="width: 100%; height: auto; object-fit: contain; display: block;"
+      alt={``}
+      aspectRatio="16:9"
+      class="w-full h-auto"
+      loading="lazy"
+    />
+  </div>
 
   <!-- HighlightedPosts Widget ******* -->
 
