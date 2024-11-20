@@ -12,7 +12,9 @@ jobs:
       # Step 1: Checkout the Repository
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+      - name: List .astro-cache
+        run: |
+          ls -la .astro-cache
       # Step 2: Restore Astro Build Cache
       - name: Restore Astro Build Cache
         uses: actions/cache@v3
