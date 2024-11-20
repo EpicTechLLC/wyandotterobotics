@@ -24,7 +24,7 @@ jobs:
 
       - name: List files
         run: |
-          ls
+          ls -la
 
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
