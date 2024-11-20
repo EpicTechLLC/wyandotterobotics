@@ -19,6 +19,8 @@ jobs:
         with:
           path: .astro-cache
           key: astro-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+              astro-cache--${{ hashFiles('**/package-lock.json') }}
 
       # Step 3: Prepare Astro Cache Directory
       - name: Prepare Astro Cache Directory
@@ -51,6 +53,8 @@ jobs:
         with:
           path: .astro-cache
           key: astro-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+              astro-cache--${{ hashFiles('**/package-lock.json') }}
 
       # Step 7: Stop and Remove Existing Container
       - name: Stop and Remove Existing Container
