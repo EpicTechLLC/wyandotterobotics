@@ -1,13 +1,9 @@
 FROM node:lts as runtime
 WORKDIR /app
-# Define the cache directory argument
-ARG CACHE_DIR=/app/.astro/cache
 
-# Create the cache directory in the container
-RUN mkdir -p $CACHE_DIR
-
+RUN mkdir /app/.astro
 # Copy the cache directory from the build context
-COPY .astro-cache $CACHE_DIR
+COPY .astro-cache/cache /app/.astro/cache
 
 # Install dependencies
 COPY package*.json ./
@@ -15,6 +11,8 @@ RUN npm install
 
 # Copy the application files
 COPY . .
+
+RUN ls -la /app/.astro/cache && echo "Cache-busting: $(date +%s)"
 
 # Build the Astro project
 RUN npm run build

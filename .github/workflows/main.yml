@@ -22,16 +22,11 @@ jobs:
           restore-keys: |
               astro-cache-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Debug Build Context
-        run: |
-          echo "Checking files in build context..."
-          ls -la .astro-cache/cache || echo ".astro-cache not found"
-
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
         run: |
           echo "Building Docker image with mounted cache..."
-          docker build --build-arg CACHE_DIR=/app/.astro/cache -t wyandotte-robotics .
+          docker build -t wyandotte-robotics .
 
       # Step 5: Verify Cache in Docker Container
       - name: Verify Cache in Docker Container
