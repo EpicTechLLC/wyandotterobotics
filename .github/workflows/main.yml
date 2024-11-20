@@ -50,14 +50,14 @@ jobs:
           docker rm wyandotte-build
           ls -la .astro-cache
 
-      # Step 6: Cache the Astro Build Cache
-      - name: Cache Astro Build Cache
-        uses: actions/cache@v3
-        with:
-          path: .astro-cache
-          key: astro-cache-${{ hashFiles('src/content/**') }}
-          restore-keys: |
-              astro-cache-${{ hashFiles('src/content/**') }}
+    #   # Step 6: Cache the Astro Build Cache
+    #   - name: Cache Astro Build Cache
+    #     uses: actions/cache@v3
+    #     with:
+    #       path: .astro-cache
+    #       key: astro-cache-${{ hashFiles('src/content/**') }}
+    #       restore-keys: |
+    #           astro-cache-${{ hashFiles('src/content/**') }}
 
       # Step 7: Stop and Remove Existing Container
       - name: Stop and Remove Existing Container
