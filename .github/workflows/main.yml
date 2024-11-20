@@ -12,9 +12,7 @@ jobs:
       # Step 1: Checkout the Repository
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: List .astro-cache
-        run: |
-          ls -la .astro-cache
+
       # Step 2: Restore Astro Build Cache
       - name: Restore Astro Build Cache
         uses: actions/cache@v3
@@ -24,9 +22,9 @@ jobs:
           restore-keys: |
               astro-cache-${{ hashFiles('.astro-cache/**') }}
 
-      - name: List .astro-cache
+      - name: List files
         run: |
-          ls -la .astro-cache
+          ls
 
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
