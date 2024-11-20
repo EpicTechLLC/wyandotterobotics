@@ -2,6 +2,7 @@ FROM node:lts as runtime
 WORKDIR /app
 
 RUN mkdir /app/.astro
+ARG CACHE_BUST=1
 # Copy the cache directory from the build context
 COPY .astro-cache/cache /app/.astro/cache
 

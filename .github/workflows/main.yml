@@ -12,9 +12,7 @@ jobs:
       # Step 1: Checkout the Repository
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: create .astro-cache
-        run: | 
-          mkdir -p .astro-cache/cache
+
       # Step 2: Restore Astro Build Cache
       - name: Restore Astro Build Cache
         uses: actions/cache@v3
@@ -26,13 +24,13 @@ jobs:
 
       - name: List files
         run: |
-          ls -la
+          ls -la .astro-cache
 
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
         run: |
           echo "Building Docker image with mounted cache..."
-          docker build -t wyandotte-robotics .
+          docker build --build-arg CACHE_BUST=$(date +%s) -t wyandotte-robotics .
 
       # Step 5: Verify Cache in Docker Container
       - name: Verify Cache in Docker Container
@@ -52,14 +50,14 @@ jobs:
           docker rm wyandotte-build
           ls -la .astro-cache
 
-    #   # Step 6: Cache the Astro Build Cache
-    #   - name: Cache Astro Build Cache
-    #     uses: actions/cache@v3
-    #     with:
-    #       path: .astro-cache
-    #       key: astro-cache-${{ hashFiles('.astro-cache/**') }}
-    #       restore-keys: |
-    #           astro-cache-${{ hashFiles('.astro-cache/**') }}
+      # Step 6: Cache the Astro Build Cache
+      - name: Cache Astro Build Cache
+        uses: actions/cache@v3
+        with:
+          path: .astro-cache
+          key: astro-cache-${{ hashFiles('src/content/**') }}
+          restore-keys: |
+              astro-cache-${{ hashFiles('src/content/**') }}
 
       # Step 7: Stop and Remove Existing Container
       - name: Stop and Remove Existing Container
