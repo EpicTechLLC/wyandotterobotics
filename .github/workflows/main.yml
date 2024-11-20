@@ -22,6 +22,10 @@ jobs:
           restore-keys: |
               astro-cache-${{ hashFiles('.astro-cache/**') }}
 
+      - name: List .astro-cache
+        run: |
+          ls -la .astro-cache
+
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
         run: |
