@@ -34,14 +34,21 @@ jobs:
           echo "Building Docker image with mounted cache..."
           docker build --build-arg CACHE_DIR=/app/.astro/cache -t wyandotte-robotics .
 
-      # Step 5: Extract Astro Cache
+      # Step 5: Verify Cache in Docker Container
+      - name: Verify Cache in Docker Container
+        run: |
+          docker create --name wyandotte-build wyandotte-robotics
+          docker start wyandotte-build
+          docker exec wyandotte-build ls -la /app/.astro/cache || echo "Cache not found in container!"
+          docker stop wyandotte-build
+          docker rm wyandotte-build
+
+      # Step 6: Extract Astro Cache
       - name: Extract Astro Cache
         run: |
-          echo "Extracting .astro/cache from the Docker container..."
           docker create --name wyandotte-build wyandotte-robotics
           docker cp wyandotte-build:/app/.astro/cache .astro-cache
           docker rm wyandotte-build
-          echo "Astro cache extracted successfully!"
 
       # Step 6: Cache the Astro Build Cache
       - name: Cache Astro Build Cache
