@@ -18,9 +18,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .astro-cache
-          key: astro-cache-${{ hashFiles('.astro-cache/cache/**') }}
+          key: astro-cache-${{ hashFiles('.astro-cache/**') }}
           restore-keys: |
-              astro-cache-${{ hashFiles('.astro-cache/cache/**') }}
+              astro-cache-${{ hashFiles('.astro-cache/**') }}
 
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
@@ -50,9 +50,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .astro-cache
-          key: astro-cache-${{ hashFiles('.astro-cache/cache/**') }}
+          key: astro-cache-${{ hashFiles('.astro-cache/**') }}
           restore-keys: |
-              astro-cache-${{ hashFiles('.astro-cache/cache/**') }}
+              astro-cache-${{ hashFiles('.astro-cache/**') }}
 
       # Step 7: Stop and Remove Existing Container
       - name: Stop and Remove Existing Container
