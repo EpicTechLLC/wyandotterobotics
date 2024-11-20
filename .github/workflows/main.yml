@@ -48,7 +48,7 @@ jobs:
           docker create --name wyandotte-build wyandotte-robotics
           docker cp wyandotte-build:/app/.astro/cache .astro-cache
           docker rm wyandotte-build
-          ls -la ./astro-cache
+          ls -la .astro-cache
 
     #   # Step 6: Cache the Astro Build Cache
     #   - name: Cache Astro Build Cache
