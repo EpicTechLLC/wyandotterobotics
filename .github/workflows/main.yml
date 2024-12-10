@@ -25,6 +25,7 @@ jobs:
       - name: List files
         run: |
           ls -la .astro-cache
+        continue-on-error: true
 
       # Step 4: Build the Docker Image
       - name: Build Docker Image with Cache Volume
