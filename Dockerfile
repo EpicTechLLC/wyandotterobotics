@@ -1,4 +1,4 @@
-FROM node:lts as runtime
+FROM node:lts AS runtime
 WORKDIR /app
 
 RUN mkdir /app/.astro
