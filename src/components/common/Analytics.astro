@@ -12,7 +12,9 @@
         dataLayer.push(arguments);
       }
       gtag('js', new Date());
-      gtag('config', 'G-SF6B4NRXLE');
+      gtag('config', 'G-SF6B4NRXLE', {
+        page_path: window.location.pathname + window.location.search, // Ensures UTM parameters are sent
+      });
     };
   }
 </script>
