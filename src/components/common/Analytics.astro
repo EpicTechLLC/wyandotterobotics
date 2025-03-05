@@ -25,18 +25,21 @@
         const utm_source = urlParams.get('utm_source');
         const utm_medium = urlParams.get('utm_medium');
         const utm_id = urlParams.get('utm_id');
+        const utm_campaign = urlParams.get('utm_campaign');
 
         // Store UTM parameters in sessionStorage
         if (utm_source || utm_medium || utm_id) {
           sessionStorage.setItem('utm_source', utm_source || '');
           sessionStorage.setItem('utm_medium', utm_medium || '');
           sessionStorage.setItem('utm_id', utm_id || '');
+		  sessionStorage.setItem('utm_campaign', utm_campaign || '')
         }
 
         // Track UTM event
         gtag('event', 'utm_tracking', {
           utm_source: utm_source || sessionStorage.getItem('utm_source') || '(not set)',
           utm_medium: utm_medium || sessionStorage.getItem('utm_medium') || '(not set)',
+          utm_campaign: utm_campaign || sessionStorage.getItem('utm_campaign') || '(not set)',
           utm_id: utm_id || sessionStorage.getItem('utm_id') || '(not set)',
         });
 
@@ -45,6 +48,7 @@
           const source = sessionStorage.getItem('utm_source');
           const medium = sessionStorage.getItem('utm_medium');
           const id = sessionStorage.getItem('utm_id');
+          const campaign = sessionStorage.getItem('utm_campaign');
 
           if (source || medium || id) {
             document.querySelectorAll('a').forEach((link) => {
@@ -53,6 +57,7 @@
                 if (source) url.searchParams.set('utm_source', source);
                 if (medium) url.searchParams.set('utm_medium', medium);
                 if (id) url.searchParams.set('utm_id', id);
+                if (campaign) url.searchParams.set('utm_campaign', campaign);
                 link.href = url.toString();
               }
             });
