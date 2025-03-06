@@ -1,115 +1,42 @@
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-SF6B4NRXLE"></script>
 <script is:inline>
-  const GA_TRACKING_ID = 'G-SF6B4NRXLE';
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof window !== 'undefined') {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        // eslint-disable-next-line prefer-rest-params
-        dataLayer.push(arguments);
-      }
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-SF6B4NRXLE', { debug_mode: true, page_path: window.location.pathname + window.location.search });
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const utm_source = params.get('utm_source');
+    const utm_medium = params.get('utm_medium');
+    const utm_campaign = params.get('utm_campaign');
 
-      // Load GA script dynamically
-      const script = document.createElement('script');
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`;
-      script.async = true;
-      document.head.appendChild(script);
-
-      script.onload = function () {
-        gtag('js', new Date());
-        gtag('config', GA_TRACKING_ID, {
-          page_path: window.location.pathname + window.location.search,
-        });
-
-        // Capture UTM parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const utm_source = urlParams.get('utm_source');
-        const utm_medium = urlParams.get('utm_medium');
-        const utm_id = urlParams.get('utm_id');
-        const utm_campaign = urlParams.get('utm_campaign');
-
-        // Store UTM parameters in sessionStorage
-        if (utm_source || utm_medium || utm_id) {
-          sessionStorage.setItem('utm_source', utm_source || '');
-          sessionStorage.setItem('utm_medium', utm_medium || '');
-          sessionStorage.setItem('utm_id', utm_id || '');
-		  sessionStorage.setItem('utm_campaign', utm_campaign || '')
-        }
-
-        // Track UTM event
-        gtag('event', 'utm_tracking', {
-          utm_source: utm_source || sessionStorage.getItem('utm_source') || '(not set)',
-          utm_medium: utm_medium || sessionStorage.getItem('utm_medium') || '(not set)',
-          utm_campaign: utm_campaign || sessionStorage.getItem('utm_campaign') || '(not set)',
-          utm_id: utm_id || sessionStorage.getItem('utm_id') || '(not set)',
-        });
-
-        // Function to persist UTMs on internal navigation
-        function appendUTMParams() {
-          const source = sessionStorage.getItem('utm_source');
-          const medium = sessionStorage.getItem('utm_medium');
-          const id = sessionStorage.getItem('utm_id');
-          const campaign = sessionStorage.getItem('utm_campaign');
-
-          if (source || medium || id) {
-            document.querySelectorAll('a').forEach((link) => {
-              if (link.href.includes(window.location.origin)) {
-                const url = new URL(link.href);
-                if (source) url.searchParams.set('utm_source', source);
-                if (medium) url.searchParams.set('utm_medium', medium);
-                if (id) url.searchParams.set('utm_id', id);
-                if (campaign) url.searchParams.set('utm_campaign', campaign);
-                link.href = url.toString();
-              }
-            });
-          }
-        }
-
-        // Run the function on initial load
-        appendUTMParams();
-
-        // Handle client-side navigation (Astro SPA behavior)
-        document.addEventListener('astro:after-swap', appendUTMParams);
-      };
+    if (utm_source && utm_medium) {
+      sessionStorage.setItem('utm_source', utm_source);
+      sessionStorage.setItem('utm_medium', utm_medium);
+      sessionStorage.setItem('utm_campaign', utm_campaign);
     }
-  });
+
+    const storedSource = sessionStorage.getItem('utm_source');
+    const storedMedium = sessionStorage.getItem('utm_medium');
+    const storedCampaign = sessionStorage.getItem('utm_campaign');
+
+    if (storedSource && storedMedium) {
+      console.log('✅ Sending UTM Data to GA4:', storedSource, storedMedium, storedCampaign);
+
+      // Reconstruct the full URL with UTM parameters
+      const newPageLocation =
+      window.location.origin +
+      window.location.pathname +
+      `?utm_source=${storedSource}&utm_medium=${storedMedium}&utm_campaign=${storedCampaign}`;
+
+      gtag('config', 'G-SF6B4NRXLE', {
+        page_location: newPageLocation,
+        send_page_view: true,
+		debug_mode: true,
+      });
+    }
+  })();
 </script>
-
-<!-- <script is:inline>
-  if (typeof window !== 'undefined') {
-    const script = document.createElement('script');
-    script.src = `https://www.googletagmanager.com/gtag/js?id=G-SF6B4NRXLE`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    script.onload = function () {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        // eslint-disable-next-line prefer-rest-params
-        dataLayer.push(arguments);
-      }
-
-      // Get UTM parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const utm_source = urlParams.get('utm_source');
-      const utm_medium = urlParams.get('utm_medium');
-      const utm_id = urlParams.get('utm_id');
-
-      // Force GA4 to recognize UTMs as a new session
-      if (utm_source || utm_medium || utm_id) {
-        gtag('config', 'G-SF6B4NRXLE', {
-          page_path: window.location.pathname + window.location.search,
-          session_id: Date.now(), // Forces a new session
-        });
-
-        gtag('event', 'utm_tracking', {
-          event_category: 'UTM Tracking',
-          event_label: window.location.href,
-          utm_source: utm_source || '(not set)',
-          utm_medium: utm_medium || '(not set)',
-          utm_id: utm_id || '(not set)',
-        });
-      } else {
-        gtag('config', 'G-SF6B4NRXLE');
-      }
-    };
-  } -->
