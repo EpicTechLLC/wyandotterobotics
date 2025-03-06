@@ -1,13 +1,20 @@
 <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-SF6B4NRXLE"></script>
 <script is:inline>
+  // Initialize GA4
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     // eslint-disable-next-line prefer-rest-params
     dataLayer.push(arguments);
   }
   gtag('js', new Date());
-  gtag('config', 'G-SF6B4NRXLE', { debug_mode: true, page_path: window.location.pathname + window.location.search });
+  gtag('config', 'G-SF6B4NRXLE', { debug_mode: true });
+
+  /**
+   * 1) Grab & store UTM parameters on initial load
+   * 2) Re-fire page views on client-side navigations
+   */
   (function () {
+    // Store UTMs if present in the query string
     const params = new URLSearchParams(window.location.search);
     const utm_source = params.get('utm_source');
     const utm_medium = params.get('utm_medium');
@@ -19,24 +26,62 @@
       sessionStorage.setItem('utm_campaign', utm_campaign);
     }
 
-    const storedSource = sessionStorage.getItem('utm_source');
-    const storedMedium = sessionStorage.getItem('utm_medium');
-    const storedCampaign = sessionStorage.getItem('utm_campaign');
+    // On *every* page load or client-side nav, fire GA4 config with stored UTMs
+    function trackPageView() {
+      const storedSource = sessionStorage.getItem('utm_source');
+      const storedMedium = sessionStorage.getItem('utm_medium');
+      const storedCampaign = sessionStorage.getItem('utm_campaign');
 
-    if (storedSource && storedMedium) {
-      console.log('✅ Sending UTM Data to GA4:', storedSource, storedMedium, storedCampaign);
+      // Build a new page_location including the path & optional UTMs
+      const newPageLocation = window.location.href;
+      // (Or manually append UTM params if you want them visible again:
+      //   window.location.origin + window.location.pathname + `?utm_source=...`)
 
-      // Reconstruct the full URL with UTM parameters
-      const newPageLocation =
-      window.location.origin +
-      window.location.pathname +
-      `?utm_source=${storedSource}&utm_medium=${storedMedium}&utm_campaign=${storedCampaign}`;
+      console.log('Astro GA4 tracking → page_location:', newPageLocation);
+      console.log('Astro GA4 tracking → UTMs:', storedSource, storedMedium, storedCampaign);
 
       gtag('config', 'G-SF6B4NRXLE', {
         page_location: newPageLocation,
+        debug_mode: true,
         send_page_view: true,
-		debug_mode: true,
+        // Optionally pass UTMs directly:
+        campaign_source: storedSource,
+        campaign_medium: storedMedium,
+        campaign_name: storedCampaign,
       });
     }
+
+    // Fire immediately on first load
+    trackPageView();
+
+    // If Astro is purely an MPA (multi-page app), each new route is a full load
+    // and this script just runs again automatically. However, if you use client-side
+    // routing, we must detect it and re-fire trackPageView.
+    //
+    // We'll detect changes to browser history (pushState/replaceState/popstate).
+    (function (history) {
+      const pushState = history.pushState;
+      history.pushState = function () {
+        // eslint-disable-next-line prefer-rest-params
+        pushState.apply(history, arguments);
+        window.dispatchEvent(new Event('pushstate'));
+        window.dispatchEvent(new Event('locationchange'));
+      };
+
+      const replaceState = history.replaceState;
+      history.replaceState = function () {
+        // eslint-disable-next-line prefer-rest-params
+        replaceState.apply(history, arguments);
+        window.dispatchEvent(new Event('replacestate'));
+        window.dispatchEvent(new Event('locationchange'));
+      };
+
+      window.addEventListener('popstate', () => {
+        window.dispatchEvent(new Event('locationchange'));
+      });
+    })(window.history);
+
+    // Whenever the route changes client-side, re-fire page_view
+    window.addEventListener('locationchange', trackPageView);
   })();
 </script>
