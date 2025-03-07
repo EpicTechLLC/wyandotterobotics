@@ -7,7 +7,7 @@
     dataLayer.push(arguments);
   }
   gtag('js', new Date());
-  gtag('config', 'G-SF6B4NRXLE', { debug_mode: true });
+  gtag('config', 'G-SF6B4NRXLE');
 
   /**
    * 1) Grab & store UTM parameters on initial load
@@ -42,7 +42,6 @@
 
       gtag('config', 'G-SF6B4NRXLE', {
         page_location: newPageLocation,
-        debug_mode: true,
         send_page_view: true,
         // Optionally pass UTMs directly:
         campaign_source: storedSource,
