@@ -3,7 +3,13 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-const albums = await getCollection('albums');
+const albums = (await getCollection('albums')).sort((a, b) => {
+  const getYear = (title: string) => {
+    const match = title.match(/\b(19|20)\d{2}\b/);
+    return match ? parseInt(match[0]) : 0;
+  };
+  return getYear(b.data.title) - getYear(a.data.title); // Descending order
+});
 
 const metadata = {
   title: 'Wyandotte Robotics - Media',
@@ -14,7 +20,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <Hero>
     <Fragment slot="title"> Media</Fragment>
-	<Fragment slot="subtitle">Click an album to view more pictures</Fragment>
+    <Fragment slot="subtitle">Click an album to view more pictures</Fragment>
   </Hero>
   <div class="mx-auto container max-w-screen-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 p-4">
     {
