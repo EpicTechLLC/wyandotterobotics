@@ -35,18 +35,18 @@ jobs:
     # 3) Tear down the previous Compose stack (same project name)
     - name: Stop previous stack (if running)
       run: |
-        docker compose -f docker-compose.prod.yml \
+        docker compose -f docker-compose.yml \
           --project-name wyandotte \
           down --remove-orphans || true
 
     # 4) Build & bring up both services
     - name: Build & Up via Compose
       run: |
-        docker compose -f docker-compose.prod.yml \
+        docker compose -f docker-compose.yml \
           --project-name wyandotte \
           pull imgproxy
 
-        docker compose -f docker-compose.prod.yml \
+        docker compose -f docker-compose.yml \
           --project-name wyandotte \
           up -d --build --force-recreate
 
