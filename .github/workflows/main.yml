@@ -9,9 +9,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    # --------------------------------------------------------
-    # 1.  Check out repo & restore Astro cache  (unchanged)
-    # --------------------------------------------------------
+    # 1) Checkout & restore Astro cache
     - name: Checkout
       uses: actions/checkout@v4
 
@@ -26,44 +24,46 @@ jobs:
         restore-keys: |
           astro-cache-${{ hashFiles('src/content/**') }}
 
-    # --------------------------------------------------------
-    # 2.  Bring down any previous stack for this project name
-    # --------------------------------------------------------
+    # 2) Free port 8080 if any old container is still bound to it
+    - name: Free port 8080
+      run: |
+        # Find any container publishing host port 8080
+        OLD=$(docker ps -q --filter "publish=8080" || true)
+        if [ -n "$OLD" ]; then
+          echo "Removing container(s) holding port 8080: $OLD"
+          docker rm -f $OLD
+        else
+          echo "No containers binding 8080"
+        fi
+
+    # 3) Stop any previous Compose stack under project "wyandotte"
     - name: Stop previous stack (if running)
       run: |
-        docker compose -f docker-compose.yml \
-          --project-name wyandotte-robotics \
+        docker compose -f docker-compose.prod.yml \
+          --project-name wyandotte \
           down --remove-orphans || true
 
-    # --------------------------------------------------------
-    # 3.  Build & start the stack
-    # --------------------------------------------------------
+    # 4) Build & start both services via Compose
     - name: Build & Up via Compose
       run: |
-        # Pull the latest imgproxy image (site builds locally)
-        docker compose -f docker-compose.yml \
-          --project-name wyandotte-robotics \
+        docker compose -f docker-compose.prod.yml \
+          --project-name wyandotte \
           pull imgproxy
 
-        # Build site image + recreate both services
-        docker compose -f docker-compose.yml \
-          --project-name wyandotte-robotics \
+        docker compose -f docker-compose.prod.yml \
+          --project-name wyandotte \
           up -d --build --force-recreate
 
-    # --------------------------------------------------------
-    # 4.  Health check (simple)
-    # --------------------------------------------------------
+    # 5) Health-check the site
     - name: Check site health
       run: |
-        echo "Waiting for site to respond..."
+        echo "Waiting for site to respond on port 4321..."
         for i in {1..10}; do
           curl -sf http://localhost:4321/ && exit 0
           sleep 3
         done
-        echo "Site did not become healthy!" && exit 1
+        echo "Site did not respond!" && exit 1
 
-    # --------------------------------------------------------
-    # 5.  Clean up dangling images (optional)
-    # --------------------------------------------------------
+    # 6) Prune dangling images
     - name: Docker image prune
       run: docker image prune -f
