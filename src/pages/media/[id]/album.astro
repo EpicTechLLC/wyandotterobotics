@@ -3,8 +3,8 @@ import { getCollection } from 'astro:content';
 import { getAlbumImages } from '../../../utils/albums';
 import Layout from '~/layouts/PageLayout.astro';
 import ImageGallery from '~/components/ImageGallery.astro'; // A client-side hydrated component
-import { findImage } from '../../../utils/images';
-import type { ImageMetadata } from 'astro';
+// import { findImage } from '../../../utils/images';
+// import type { ImageMetadata } from 'astro';
 import Hero from '../../../components/widgets/Hero.astro';
 
 // Define dynamic paths for this route
@@ -26,11 +26,7 @@ const albums = await getCollection('albums');
 const album = albums.find((a: { id: any }) => a.id === id + '/album');
 
 let imagesData = await getAlbumImages(id);
-const images: (ImageMetadata | undefined)[] = [];
-imagesData.forEach(async (image) => {
-  const imageInfo = (await findImage(image)) as ImageMetadata | undefined;
-  images.push(imageInfo);
-});
+const images: string[] = imagesData; 
 
 const metadata = {
   title: `Wyandotte Robotics - ${album?.data.title || 'Media'}`,
@@ -43,9 +39,9 @@ const metadata = {
     <Fragment slot="title">
       {album?.data.title}
     </Fragment>
-	<Fragment slot="subtitle">
-		{album?.data.subtitle}
-	  </Fragment>
+    <Fragment slot="subtitle">
+      {album?.data.subtitle}
+    </Fragment>
   </Hero>
   <div class="flex justify-center my-16 mb-32">
     <ImageGallery images={images} albumTitle={album?.data.title || 'Album'} />

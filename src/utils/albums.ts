@@ -1,10 +1,9 @@
-export async function getAlbumImages(albumId: string) {
-  // 1. List all album files from collections path
-  let images = import.meta.glob<{ default: ImageMetadata }>('/src/content/albums/**/*.{jpeg,jpg,png}');
-
-  // 2. Filter images by albumId
-  images = Object.fromEntries(Object.entries(images).filter(([key]) => key.includes(albumId)));
-
-  const resolvedImages = await Promise.all(Object.values(images).map((image) => image().then((mod) => mod.default)));
-  return resolvedImages;
-}
+export function getAlbumImages(albumId: string): string[] {
+	// 1. Grab the file paths only (no import, no optimisation step)
+	const match = import.meta.glob('/src/content/albums/**/*.{jpeg,jpg,png}', { eager: false });
+  
+	// 2. Filter by album and strip the leading "/src/content/" part
+	return Object.keys(match)
+	  .filter((path) => path.includes(albumId))
+	  .map((path) => path.replace('/src/content/', ''));   //  -> albums/2024/dog.jpg
+  }

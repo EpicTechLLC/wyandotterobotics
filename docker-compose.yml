@@ -2,7 +2,15 @@ services:
   wyandote-robotics-website:
     build: .
     ports:
-      - "4321:4321"
+      - '4321:4321'
     environment:
       - HOST=0.0.0.0
       - PORT=4321
+
+  imgproxy:
+    image: ghcr.io/imgproxy/imgproxy:latest
+    env_file: .env.imgproxy # holds IMGPROXY_* vars
+    volumes:
+      - ./src/content/albums:/data/albums:ro
+    ports:
+      - '8080:8080'

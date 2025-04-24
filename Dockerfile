@@ -4,7 +4,7 @@ WORKDIR /app
 RUN mkdir /app/.astro
 ARG CACHE_BUST=1
 # Copy the cache directory from the build context
-COPY .astro-cache /app/.astro/cache
+# COPY .astro-cache /app/.astro/cache
 
 # Add a cache-busting dummy command
 RUN echo "Cache busting step: $(date +%s)"
@@ -16,7 +16,7 @@ RUN npm install
 # Copy the application files
 COPY . .
 
-RUN ls -la /app/.astro/cache && echo "Cache-busting: $(date +%s)"
+# RUN ls -la /app/.astro/cache && echo "Cache-busting: $(date +%s)"
 
 # Build the Astro project
 RUN npm run build

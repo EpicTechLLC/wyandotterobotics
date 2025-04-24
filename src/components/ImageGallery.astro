@@ -1,9 +1,9 @@
 ---
-import Image from '~/components/common/Image.astro';
-import type { ImageMetadata } from 'astro';
-
-const { images, albumTitle } = Astro.props;
-
+import { resize } from '~/utils/resize';
+const { images, albumTitle } = Astro.props as {
+  images: string[];
+  albumTitle: string;
+};
 ---
 
 <style>
@@ -57,27 +57,22 @@ const { images, albumTitle } = Astro.props;
 
 <div>
   <!-- Gallery -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 place-items-center mx-auto p-10">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 place-items-center mx-auto p-10"
+  >
     {
-      images.map((image: ImageMetadata) => {
-        if (image) {
-          return (
-            <button
-              class="gallery-button mb-4 w-full"
-              data-src={image.src}
-              data-width={image.width || 1200}
-              data-height={image.height || 800}
-            >
-              <Image
-                src={image}
-                alt={`Thumbnail from ${albumTitle}`}
-                aspectRatio="16:9"
-                class="w-full h-auto"
-                loading="lazy"
-              />
-            </button>
-          );
-        }
+      images.map((file: string) => {
+        const thumb = resize(file, 400); // small grid thumbnail
+        return (
+          <button class="gallery-button mb-4 w-full" data-src={resize(file, 1600)}>
+            <img
+              src={thumb}
+              alt={`Thumbnail from ${albumTitle}`}
+              loading="lazy"
+              class="w-full h-auto aspect-video object-cover"
+            />
+          </button>
+        );
       })
     }
   </div>
