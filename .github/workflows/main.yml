@@ -76,6 +76,12 @@ jobs:
             docker rm wyandotte-robotics
           fi
           echo "Existing container stopped and removed!"
+          if [ "$(docker ps -q -f name=wr-imgproxy)" ]; then
+            docker stop wr-imgproxy
+          fi
+          if [ "$(docker ps -aq -f name=wr-imgproxy)" ]; then
+            docker rm wr-imgproxy
+          fi
 
       # Step 8: Run New Container with Health Check
       - name: Run New Container with Health Check
@@ -91,6 +97,17 @@ jobs:
             --health-retries=3 \
             wyandotte-robotics
           echo "New container started successfully!"
+
+      - name: Run New imgproxy Container
+        run: |
+          docker run -d \
+            --name wr-imgproxy \
+            --restart unless-stopped \
+            -p 8080:8080 \
+            -v ~/actions-runner/_work/wyandotterobotics/wyandotterobotics/src/content/albums \   # <-- adjust host path
+            --env-file .env.imgproxy \                             # <-- repo-root or absolute path
+            ghcr.io/imgproxy/imgproxy:latest
+          echo "imgproxy container started successfully!"
 
       # Step 9: Clean Up Old Docker Images
       - name: Remove Unused Docker Images
