@@ -10,7 +10,7 @@ jobs:
 
     steps:
     # --------------------------------------------------------
-    # 1) Checkout & restore Astro cache (UNCHANGED)
+    # 1.  Check out repo & restore Astro cache  (unchanged)
     # --------------------------------------------------------
     - name: Checkout
       uses: actions/checkout@v4
@@ -27,25 +27,43 @@ jobs:
           astro-cache-${{ hashFiles('src/content/**') }}
 
     # --------------------------------------------------------
-    # 2) Build + deploy entire stack with Compose  (★ NEW ★)
+    # 2.  Bring down any previous stack for this project name
+    # --------------------------------------------------------
+    - name: Stop previous stack (if running)
+      run: |
+        docker compose -f docker-compose.yml \
+          --project-name wyandotte-robotics \
+          down --remove-orphans || true
+
+    # --------------------------------------------------------
+    # 3.  Build & start the stack
     # --------------------------------------------------------
     - name: Build & Up via Compose
       run: |
-        # pull latest imgproxy, build site image, recreate stack
-        docker compose -f docker-compose.yml pull imgproxy
-        docker compose -f docker-compose.yml up -d --build --force-recreate --remove-orphans
+        # Pull the latest imgproxy image (site builds locally)
+        docker compose -f docker-compose.yml \
+          --project-name wyandotte-robotics \
+          pull imgproxy
+
+        # Build site image + recreate both services
+        docker compose -f docker-compose.yml \
+          --project-name wyandotte-robotics \
+          up -d --build --force-recreate
 
     # --------------------------------------------------------
-    # 3) Verify health (optional)
+    # 4.  Health check (simple)
     # --------------------------------------------------------
     - name: Check site health
       run: |
-        # wait a few seconds for containers to report healthy
-        sleep 10
-        curl -f http://localhost:4321/ || (echo "Site not responding!" && exit 1)
+        echo "Waiting for site to respond..."
+        for i in {1..10}; do
+          curl -sf http://localhost:4321/ && exit 0
+          sleep 3
+        done
+        echo "Site did not become healthy!" && exit 1
 
     # --------------------------------------------------------
-    # 4) Clean up dangling images (optional)
+    # 5.  Clean up dangling images (optional)
     # --------------------------------------------------------
     - name: Docker image prune
       run: docker image prune -f
