@@ -1,117 +1,51 @@
-name: Build and Deploy Wyandotte Robotics Site
+name: Build & Deploy Wyandotte Robotics (Compose)
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
     runs-on: self-hosted
 
     steps:
-      # Step 1: Checkout the Repository
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+    # --------------------------------------------------------
+    # 1) Checkout & restore Astro cache (UNCHANGED)
+    # --------------------------------------------------------
+    - name: Checkout
+      uses: actions/checkout@v4
 
-      - name: Ensure astro-cache directory
-        run: mkdir -p .astro-cache
+    - name: Ensure astro-cache directory
+      run: mkdir -p .astro-cache
 
-      # Step 2: Restore Astro Build Cache
-      - name: Restore Astro Build Cache
-        uses: actions/cache@v3
-        with:
-          path: .astro-cache
-          key: astro-cache-${{ hashFiles('src/content/**') }}
-          restore-keys: |
-              astro-cache-${{ hashFiles('src/content/**') }}
+    - name: Restore Astro Build Cache
+      uses: actions/cache@v3
+      with:
+        path: .astro-cache
+        key: astro-cache-${{ hashFiles('src/content/**') }}
+        restore-keys: |
+          astro-cache-${{ hashFiles('src/content/**') }}
 
-      - name: List files
-        run: |
-          ls -la .astro-cache
-        continue-on-error: true
+    # --------------------------------------------------------
+    # 2) Build + deploy entire stack with Compose  (★ NEW ★)
+    # --------------------------------------------------------
+    - name: Build & Up via Compose
+      run: |
+        # pull latest imgproxy, build site image, recreate stack
+        docker compose -f docker-compose.yml pull imgproxy
+        docker compose -f docker-compose.yml up -d --build --force-recreate
 
-      # Step 4: Build the Docker Image
-      - name: Build Docker Image with Cache Volume
-        run: |
-          echo "Building Docker image with mounted cache..."
-          docker build --build-arg CACHE_BUST=$(date +%s) -t wyandotte-robotics .
+    # --------------------------------------------------------
+    # 3) Verify health (optional)
+    # --------------------------------------------------------
+    - name: Check site health
+      run: |
+        # wait a few seconds for containers to report healthy
+        sleep 10
+        curl -f http://localhost:4321/ || (echo "Site not responding!" && exit 1)
 
-      # Step 5: Verify Cache in Docker Container
-      - name: Verify Cache in Docker Container
-        run: |
-          docker create --name wyandotte-build wyandotte-robotics
-          docker start wyandotte-build
-          docker exec wyandotte-build ls -la /app/.astro/cache || echo "Cache not found in container!"
-          docker stop wyandotte-build
-          docker rm wyandotte-build
-
-      # Step 6: Extract Astro Cache
-      - name: Extract Astro Cache
-        run: |
-          rm -rf .astro-cache
-          docker create --name wyandotte-build wyandotte-robotics
-          docker cp wyandotte-build:/app/.astro/cache .astro-cache
-          docker rm wyandotte-build
-          ls -la .astro-cache
-
-    #   # Step 6: Cache the Astro Build Cache
-    #   - name: Cache Astro Build Cache
-    #     uses: actions/cache@v3
-    #     with:
-    #       path: .astro-cache
-    #       key: astro-cache-${{ hashFiles('src/content/**') }}
-    #       restore-keys: |
-    #           astro-cache-${{ hashFiles('src/content/**') }}
-
-      # Step 7: Stop and Remove Existing Container
-      - name: Stop and Remove Existing Container
-        run: |
-          echo "Stopping and removing existing container..."
-          if [ "$(docker ps -q -f name=wyandotte-robotics)" ]; then
-            echo "Stopping container..."
-            docker stop wyandotte-robotics
-          fi
-          if [ "$(docker ps -aq -f name=wyandotte-robotics)" ]; then
-            echo "Removing container..."
-            docker rm wyandotte-robotics
-          fi
-          echo "Existing container stopped and removed!"
-          if [ "$(docker ps -q -f name=wr-imgproxy)" ]; then
-            docker stop wr-imgproxy
-          fi
-          if [ "$(docker ps -aq -f name=wr-imgproxy)" ]; then
-            docker rm wr-imgproxy
-          fi
-
-      # Step 8: Run New Container with Health Check
-      - name: Run New Container with Health Check
-        run: |
-          echo "Running new container..."
-          docker run -d \
-            -p 4321:4321 \
-            --name wyandotte-robotics \
-            --restart unless-stopped \
-            --health-cmd="curl -f http://localhost:4321/ || exit 1" \
-            --health-interval=30s \
-            --health-timeout=10s \
-            --health-retries=3 \
-            wyandotte-robotics
-          echo "New container started successfully!"
-
-      - name: Run New imgproxy Container
-        run: |
-          docker run -d \
-            --name wr-imgproxy \
-            --restart unless-stopped \
-            -p 8080:8080 \
-            -v ~/actions-runner/_work/wyandotterobotics/wyandotterobotics/src/content/albums \   # <-- adjust host path
-            --env-file .env.imgproxy \                             # <-- repo-root or absolute path
-            ghcr.io/imgproxy/imgproxy:latest
-          echo "imgproxy container started successfully!"
-
-      # Step 9: Clean Up Old Docker Images
-      - name: Remove Unused Docker Images
-        run: |
-          echo "Cleaning up unused Docker images..."
-          docker image prune -f
-          echo "Unused Docker images removed!"
+    # --------------------------------------------------------
+    # 4) Clean up dangling images (optional)
+    # --------------------------------------------------------
+    - name: Docker image prune
+      run: docker image prune -f
