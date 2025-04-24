@@ -33,7 +33,7 @@ jobs:
       run: |
         # pull latest imgproxy, build site image, recreate stack
         docker compose -f docker-compose.yml pull imgproxy
-        docker compose -f docker-compose.yml up -d --build --force-recreate
+        docker compose -f docker-compose.yml up -d --build --force-recreate --remove-orphans
 
     # --------------------------------------------------------
     # 3) Verify health (optional)
