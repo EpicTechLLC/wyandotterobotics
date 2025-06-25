@@ -3,6 +3,8 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import { getPermalink } from '../utils/permalinks';
+import Headline from '../components/blog/Headline.astro';
+import WidgetWrapper from '../components/ui/WidgetWrapper.astro';
 
 const metadata = {
   title: 'Resources',
@@ -26,8 +28,32 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
     <Fragment slot="subtitle">Your Go-To Hub for Team Guides, Training, and Reference Materials </Fragment>
   </Hero>
 
+  <WidgetWrapper id="table-of-contents">
+    <Headline
+      title="Table of Contents"
+      subtitle="Quick links to key sections"
+      classes={{
+        title: 'text-2xl font-semibold text-center',
+        subtitle: 'text-base text-center text-gray-500',
+      }}
+    />
+
+    <nav class="mt-6 max-w-3xl mx-auto text-center text-lg text-gray-700">
+      <p>
+        <a href="#our-team" class="text-primary hover:underline mx-2">Team</a> |
+        <a href="#competition-resources" class="text-primary hover:underline mx-2">Competition</a> |
+        <a href="#resources-from-other-teams" class="text-primary hover:underline mx-2">Other Teams</a> |
+        <a href="#programming-resources" class="text-primary hover:underline mx-2">Programming</a> |
+        <a href="#parts" class="text-primary hover:underline mx-2">Parts</a>
+      </p>
+    </nav>
+
+    <hr class="mt-10 border-gray-300 max-w-screen-md mx-auto" />
+  </WidgetWrapper>
+
   <Features3
-    title="Team Resources"
+    title="Our Team"
+    id="our-team"
     subtitle="Useful team links"
     columns={3}
     defaultIcon="tabler:point-filled"
@@ -92,6 +118,7 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
   />
   <Features3
     title="Competition Resources"
+    id="competition-resources"
     subtitle="Useful team links"
     columns={3}
     defaultIcon="tabler:point-filled"
@@ -119,23 +146,24 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
         },
       },
       {
+        title: 'Chief Delphi',
+        description:
+          'Main online forum for the FIRST Robotics Competition (FRC) community. It serves as a central hub for discussion, collaboration, support, and announcements related to FRC teams, events, and technical topics.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.chiefdelphi.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
         title: 'FIRST Build Season Timeline',
         description: 'A timeline for how teams should plan their build season',
         callToAction: {
           variant: 'secondary',
           text: 'Get Document',
           href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/team-resources/build_season_timeline_11x17.pdf',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'FIRST Kickoff Worksheet',
-        description: 'A general plan for what to look for right after kick off',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Get Document',
-          href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/technical-resources/frc-kickoff-worksheet.pdf',
           target: '_blank',
           icon: 'tabler:link',
         },
@@ -151,10 +179,22 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
           icon: 'tabler:link',
         },
       },
+      {
+        title: 'FIRST Kickoff Worksheet',
+        description: 'A general plan for what to look for right after kick off',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Get Document',
+          href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/technical-resources/frc-kickoff-worksheet.pdf',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
     ]}
   />
   <Features3
     title="Resources From Other Teams"
+    id="resources-from-other-teams"
     subtitle="Useful team links"
     columns={3}
     defaultIcon="tabler:point-filled"
@@ -197,6 +237,7 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
   />
   <Features3
     title="Programming Resources"
+    id="programming-resources"
     subtitle="Useful links for programmers as well as libraries we find useful"
     columns={3}
     defaultIcon="tabler:point-filled"
@@ -262,6 +303,7 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
   />
   <Features3
     title="Parts"
+    id="parts"
     subtitle="These are sites we have gotten parts from"
     columns={3}
     defaultIcon="tabler:point-filled"
@@ -388,4 +430,26 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
       },
     ]}
   />
+  <div
+    id="backToTop"
+    class="hidden fixed bottom-6 right-6 z-50 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 shadow-md rounded-full px-4 py-2 text-sm text-primary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+  >
+    <a href="#table-of-contents" class="hover:underline">↑ Back to Top</a>
+  </div>
+  <script is:inline>
+    const toc = document.getElementById('table-of-contents');
+    const backToTop = document.getElementById('backToTop');
+
+    function toggleBackToTop() {
+      if (!toc || !backToTop) return;
+
+      const tocBottom = toc.getBoundingClientRect().bottom + window.scrollY;
+      const scrolledPastTOC = window.scrollY > tocBottom;
+
+      backToTop.classList.toggle('hidden', !scrolledPastTOC);
+    }
+
+    window.addEventListener('scroll', toggleBackToTop);
+    window.addEventListener('load', toggleBackToTop);
+  </script>
 </Layout>
