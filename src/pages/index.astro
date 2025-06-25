@@ -7,6 +7,9 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import mascot from '../assets/images/1847-round-color.png';
 import Image from '~/components/common/Image.astro';
+import Headline from '../components/blog/Headline.astro';
+import WidgetWrapper from '../components/ui/WidgetWrapper.astro';
+import { Icon } from 'astro-icon/components';
 
 const metadata = {
   title: 'Wyandotte Robotics',
@@ -33,6 +36,51 @@ const metadata = {
     information={`The blog is used to display
                 `}
   /> -->
+
+  <WidgetWrapper>
+    <Headline
+      title="Welcome to Wyandotte Robotics (WRATH)"
+      subtitle="FRC Team 1847 – Based in Kansas City, KS at Wyandotte High School"
+      alignment="center"
+    />
+
+    <p class="text-lg text-center mb-4 max-w-3xl mx-auto">
+      Founded in 2006, we design, build, and program competitive robots as part of the FIRST Robotics Competition (FRC).
+      Our mission is to empower students with real-world STEM skills and create a welcoming, innovative team culture.
+    </p>
+
+    <p class="text-md text-center mb-6 max-w-2xl mx-auto">
+      Follow us for updates, team stories, and competition highlights:
+    </p>
+
+    <div class="flex justify-center flex-wrap gap-6 text-base font-medium">
+      <a
+        href="https://www.instagram.com/wyandotterobotics1847"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 hover:underline"
+      >
+        <Icon name="tabler:brand-instagram" class="w-5 h-5 text-primary" />
+        Instagram
+      </a>
+
+      <a
+        href="https://www.facebook.com/profile.php?id=61566039357792"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 hover:underline"
+      >
+	  <Icon name="tabler:brand-facebook" class="w-5 h-5 text-primary" />
+        Facebook
+      </a>
+
+      <a href="/signup" class="flex items-center gap-2 hover:underline">
+        <Icon name="tabler:mail" class="w-5 h-5 text-primary" />
+        Mailing List
+      </a>
+    </div>
+  </WidgetWrapper>
+
   <!-- Stats Widget ****************** -->
 
   <Stats
@@ -130,7 +178,7 @@ const metadata = {
     <Fragment slot="title"> Wyandotte Robotics Mailing List </Fragment>
 
     <Fragment slot="subtitle">
-      Join our maling list to get updates on our team as well as information about when the team meets.
+      Join our mailing list to get updates on our team as well as information about when the team meets.
     </Fragment>
   </CallToAction>
 </Layout>
