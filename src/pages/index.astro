@@ -11,6 +11,8 @@ import Headline from '../components/blog/Headline.astro';
 import WidgetWrapper from '../components/ui/WidgetWrapper.astro';
 import { Icon } from 'astro-icon/components';
 
+const SHOW_JOIN_BUTTON = true;
+
 const metadata = {
   title: 'Wyandotte Robotics',
   ignoreTitleTemplate: true,
@@ -29,20 +31,23 @@ const metadata = {
     />
   </div>
 
-  <!-- HighlightedPosts Widget ******* -->
-
-  <!-- <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display
-                `}
-  /> -->
-
   <WidgetWrapper>
     <Headline
       title="Welcome to Wyandotte Robotics (WRATH)"
       subtitle="FRC Team 1847 – Based in Kansas City, KS at Wyandotte High School"
       alignment="center"
     />
+
+    {
+      SHOW_JOIN_BUTTON && (
+        <div class="flex justify-center mb-16">
+          <a href="/join-team" class="btn-primary">
+            Join the Team
+            <Icon name="tabler:arrow-right" class="w-5 h-5 ml-2 inline-block" />
+          </a>
+        </div>
+      )
+    }
 
     <p class="text-lg text-center mb-4 max-w-3xl mx-auto">
       Founded in 2006, we design, build, and program competitive robots as part of the FIRST Robotics Competition (FRC).
@@ -70,7 +75,7 @@ const metadata = {
         rel="noopener noreferrer"
         class="flex items-center gap-2 hover:underline"
       >
-	  <Icon name="tabler:brand-facebook" class="w-5 h-5 text-primary" />
+        <Icon name="tabler:brand-facebook" class="w-5 h-5 text-primary" />
         Facebook
       </a>
 
