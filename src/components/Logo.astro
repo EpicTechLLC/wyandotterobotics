@@ -4,7 +4,11 @@ import Image from '~/components/common/Image.astro';
 const mascotLogo = '~/assets/images/1847-mascot-color.png';
 ---
 
-<span class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-2xl font-bold whitespace-nowrap dark:text-white">
-  <Image src={mascotLogo} alt="Logo" class="inline-block mr-2" width="65px" />
-  {SITE?.name}
+<span class="flex items-start md:items-center md:flex-row flex-col min-w-0">
+  <Image src={mascotLogo} alt="Logo" class="w-[65px] h-[52px] md:mr-2 mb-1 md:mb-0" width="65px" />
+  <span
+    class="self-start md:self-center ml-0 md:ml-2 text-2xl font-bold whitespace-normal md:whitespace-nowrap break-words overflow-hidden"
+  >
+    {SITE?.name}
+  </span>
 </span>

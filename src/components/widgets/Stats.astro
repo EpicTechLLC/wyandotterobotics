@@ -23,7 +23,7 @@ const {
     {
       stats &&
         stats.map(({ amount, title, icon }, index) => (
-          <div class="p-4 w-full min-w-[220px] text-center stat" data-index={index}>
+          <div class="p-3 w-full min-w-0 sm:min-w-[220px] text-center stat" data-index={index}>
             {icon && (
               <div class="flex items-center justify-center mx-auto mb-4 text-primary">
                 <Icon name={icon} class="w-10 h-10" />
