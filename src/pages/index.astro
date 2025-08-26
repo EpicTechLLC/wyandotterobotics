@@ -41,7 +41,10 @@ const metadata = {
     {
       SHOW_JOIN_BUTTON && (
         <div class="flex justify-center mb-16">
-          <a href="/join-team" class="btn-primary">
+          <a
+            href="/join-team"
+            class="btn-primary text-lg px-8 py-4 transition transform hover:scale-105 hover:shadow-lg cta-nudge shimmer"
+          >
             Join the Team
             <Icon name="tabler:arrow-right" class="w-5 h-5 ml-2 inline-block" />
           </a>
@@ -187,3 +190,99 @@ const metadata = {
     </Fragment>
   </CallToAction>
 </Layout>
+
+<style>
+  /* Runs a quick “nudge” every 4s: slight scale + arrow slides right then back */
+  @keyframes ctaNudge {
+    0%,
+    84%,
+    100% {
+      transform: scale(1);
+    }
+    86% {
+      transform: scale(1.02);
+    }
+    90% {
+      transform: scale(1.05);
+    }
+    94% {
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes ctaIconSlide {
+    0%,
+    84%,
+    100% {
+      transform: translateX(0);
+    }
+    88% {
+      transform: translateX(4px);
+    }
+    92% {
+      transform: translateX(8px);
+    }
+    96% {
+      transform: translateX(0);
+    }
+  }
+
+  .cta-nudge {
+    will-change: transform;
+    animation: ctaNudge 4s ease-in-out infinite;
+    /* keep hover responsive and crisp */
+    transition:
+      transform 150ms ease,
+      box-shadow 150ms ease;
+  }
+  .cta-nudge:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  }
+  .cta-icon {
+    will-change: transform;
+    animation: ctaIconSlide 2s ease-in-out infinite;
+  }
+
+  /* Optional: quick ripple when actually clicked (micro feedback) */
+  .cta-nudge:active {
+    transform: scale(0.98);
+  }
+
+  /* Respect users who prefer less motion */
+  @media (prefers-reduced-motion: reduce) {
+    .cta-nudge,
+    .cta-icon {
+      animation: none !important;
+    }
+  }
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-130%);
+    background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.45) 50%, transparent 100%);
+    animation: shimmerMove 3s ease-in-out infinite;
+  }
+  @keyframes shimmerMove {
+    0%,
+    10% {
+      transform: translateX(-130%);
+    }
+    50% {
+      transform: translateX(130%);
+    }
+    100% {
+      transform: translateX(130%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shimmer::after {
+      animation: none;
+    }
+  }
+</style>
