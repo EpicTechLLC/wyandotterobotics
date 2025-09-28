@@ -47,6 +47,10 @@ const {
           {description && (
             <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
           )}
+		{callToAction && (callToAction.download?.toString().includes(".png") || callToAction?.download?.toString().includes(".svg"))? 
+				<img class="bg-stone-200 rounded-lg" style="padding: 1rem;" src={callToAction.href?.toString()}/>
+				: null
+			  }
           {callToAction && (
             <div class="mt-2">
               <Button {...callToAction} />
