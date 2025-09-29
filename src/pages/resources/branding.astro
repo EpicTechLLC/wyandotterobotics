@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import Features from '../../components/widgets/Features.astro';
 import type { CallToAction, Item } from '../../types';
+import Features2 from '../../components/widgets/Features2.astro';
 
 const pdfs: Record<string, { default: string }> = import.meta.glob(
   '/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf',
@@ -9,7 +9,7 @@ const pdfs: Record<string, { default: string }> = import.meta.glob(
 );
 const pdfUrl = pdfs['/src/assets/pdf/Wyandotte-Robotics-Branding-Standards-V1.pdf'].default;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const images = import.meta.glob<Record<string, { default: any }>>('/src/assets/images/branding/*.png', {
+const images = import.meta.glob<Record<string, { default: any }>>('/src/assets/images/branding/*.{png,svg}', {
   eager: true,
 });
 
@@ -53,7 +53,7 @@ const metadata = {
     </object>
   </div>
 
-  <Features
+  <Features2
     title="PDF Files"
     columns={3}
     items={[
@@ -69,7 +69,7 @@ const metadata = {
       },
     ]}
   />
-  <Features title="Image Files" subtitle="All image files" columns={3} items={[...(imageLinks as Item[])]} />
+  <Features2 title="Image Files" subtitle="All image files" columns={3} items={[...(imageLinks as Item[])]} />
 </Layout>
 <style>
   /* Base styles for the PDF object */

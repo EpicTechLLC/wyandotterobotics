@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 21" stroke="rgb(191,0,0)"
+	stroke-width="1" fill="none" stroke-linecap="square">
+	<path
+		d="M4.8 19.4V5.5L1.9 6.6.6 3.6 5.3 1.6H9.4V19.4Z"
+		stroke-dasharray="200"
+		stroke-dashoffset="200"
+	>
+		<animate
+			id="WRATH8Animation1"
+			attributeName="stroke-dashoffset"
+			from="200"
+			to="0"
+			begin="0.6"
+			dur="1.5s"
+			fill="freeze"
+		/>
+	</path>
+	<path
+		d=" M17.8 12.3Q16.3 12.3 16.3 13.8V14.8Q16.3 15.4 16.6 15.8 16.9 16.1 17.5 16.1H21.3Q21.9 16.1 22.3 15.8 22.6 15.4 22.6 14.8V13.8Q22.6 12.3 21.1 12.3ZM27.2 14.8Q27.1 17.4 26 18.5T22.4 19.6H16.5Q14.1 19.7 12.9 18.5T11.7 14.8V14.6Q11.7 12.6 12.7 11.4 13.4 10.3 14.7 10 13.6 9.6 12.9 8.7 12.2 7.7 12.2 6.2V5.9Q12.2 3.6 13.4 2.5 14.5 1.3 17 1.3H21.9Q24.3 1.3 25.5 2.5 26.7 3.6 26.7 5.9V6.2Q26.7 7.7 26 8.7 25.3 9.6 24.1 10 26.2 10.6 26.9 12.7 27.2 13.5 27.2 14.6ZM18.3 4.9Q16.8 4.9 16.8 6.4V7.2Q16.8 8.7 18.3 8.7H20.6Q22.1 8.7 22.1 7.2V6.4Q22.1 4.9 20.6 4.9Z"
+		stroke-dasharray="200"
+		stroke-dashoffset="200"
+	>
+		<animate
+			id="WRATH8Animation8"
+			attributeName="stroke-dashoffset"
+			from="200"
+			to="0"
+			dur="1.5s"
+			begin="WRATH8Animation1.begin +0.1s"
+			fill="freeze"
+		/>
+	</path>
+	<path
+		d="M37.9 15.8H28.4V12.3L34.5 1.6H39.6L33.5 12.3H37.9V8.5H42.4V12.3H44.2V15.8H42.4V19.4H37.9Z"
+		stroke-dasharray="200"
+		stroke-dashoffset="200"
+	>
+		<animate
+			id="WRATH8Animation4"
+			attributeName="stroke-dashoffset"
+			from="200"
+			to="0"
+			dur="1.5s"
+			begin="WRATH8Animation8.begin + 0.1s"
+			fill="freeze"
+		/>
+	</path>
+	<path
+		d="M43.2 1.6H56.9V5.2L51.1 19.4H46L52.1 5.2H43.2Z"
+		stroke-dasharray="200"
+		stroke-dashoffset="200"
+	>
+		<animate
+			id="WRATH8Animation7"
+			attributeName="stroke-dashoffset"
+			from="200"
+			to="0"
+			dur="1.5s"
+			begin="WRATH8Animation4.begin + 0.1s"
+			fill="freeze"
+		/>
+	</path>
+</svg>
