@@ -2,7 +2,6 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features3 from '~/components/widgets/Features3.astro';
-import { getPermalink } from '../utils/permalinks';
 import Headline from '../components/blog/Headline.astro';
 import WidgetWrapper from '../components/ui/WidgetWrapper.astro';
 
@@ -89,18 +88,6 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
           target: '_blank',
           icon: 'tabler:brand-github',
           href: 'https://github.com/FRCTeam1847',
-        },
-      },
-      {
-        title: 'Mailing list',
-        description:
-          'Our official mailing list sending out announcements on meetings, competitions and reminders for students.',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Mailing list',
-          //target: '_blank',
-          icon: 'tabler:mail',
-          href: getPermalink('/signup'),
         },
       },
       {

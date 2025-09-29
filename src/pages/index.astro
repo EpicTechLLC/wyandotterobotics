@@ -1,9 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
-// import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import mascot from '../assets/images/1847-round-color.png';
 import Image from '~/components/common/Image.astro';
@@ -82,10 +79,6 @@ const metadata = {
         Facebook
       </a>
 
-      <a href="/signup" class="flex items-center gap-2 hover:underline">
-        <Icon name="tabler:mail" class="w-5 h-5 text-primary" />
-        Mailing List
-      </a>
     </div>
   </WidgetWrapper>
 
@@ -169,26 +162,6 @@ const metadata = {
       },
     ]}
   />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Join Our Mailing List ',
-        href: '/signup',
-        target: '_blank',
-        icon: 'tabler:mail',
-      },
-    ]}
-  >
-    <Fragment slot="title"> Wyandotte Robotics Mailing List </Fragment>
-
-    <Fragment slot="subtitle">
-      Join our mailing list to get updates on our team as well as information about when the team meets.
-    </Fragment>
-  </CallToAction>
 </Layout>
 
 <style>
