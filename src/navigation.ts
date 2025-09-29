@@ -31,10 +31,6 @@ export const headerData = {
       text: 'Media',
       href: getPermalink('/media'),
     },
-    {
-      text: 'Mailing List',
-      href: getPermalink('/signup'),
-    },
     // {
     // 	text: 'Contact',
     // 	href: getPermalink('/contact'),
