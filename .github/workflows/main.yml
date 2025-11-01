@@ -1,6 +1,7 @@
 name: Build & Deploy Wyandotte Robotics (Compose)
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
