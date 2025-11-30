@@ -40,16 +40,16 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
     <nav class="mt-6 max-w-3xl mx-auto text-center text-lg text-gray-700">
       <p>
         <a href="#our-team" class="text-primary hover:underline mx-2">Team</a> |
-        <a href="#competition-resources" class="text-primary hover:underline mx-2">Competition</a> |
-        <a href="#resources-from-other-teams" class="text-primary hover:underline mx-2">Other Teams</a> |
+        <a href="#parts" class="text-primary hover:underline mx-2">Parts</a> |
         <a href="#programming-resources" class="text-primary hover:underline mx-2">Programming</a> |
-        <a href="#parts" class="text-primary hover:underline mx-2">Parts</a>
+        <a href="#competition-resources" class="text-primary hover:underline mx-2">Competition</a> |
+        <a href="#resources-from-other-teams" class="text-primary hover:underline mx-2">Other Teams</a>
       </p>
     </nav>
 
     <hr class="mt-10 border-gray-300 max-w-screen-md mx-auto" />
   </WidgetWrapper>
-
+  <!-- Our Team -->
   <Features3
     title="Our Team"
     id="our-team"
@@ -103,191 +103,7 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
       },
     ]}
   />
-  <Features3
-    title="Competition Resources"
-    id="competition-resources"
-    subtitle="Useful team links"
-    columns={3}
-    defaultIcon="tabler:point-filled"
-    items={[
-      {
-        title: 'The Blue Alliance',
-        description: 'The Blue Alliance provides event, team, and ranking information for FRC',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://thebluealliance.com',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'Statbotics.io',
-        description: 'Provides ranking information for all teams based off Expected Points Added (EPA)',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://www.statbotics.io/',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'Chief Delphi',
-        description:
-          'Main online forum for the FIRST Robotics Competition (FRC) community. It serves as a central hub for discussion, collaboration, support, and announcements related to FRC teams, events, and technical topics.',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://www.chiefdelphi.com/',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'FIRST Build Season Timeline',
-        description: 'A timeline for how teams should plan their build season',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Get Document',
-          href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/team-resources/build_season_timeline_11x17.pdf',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'FIRST Kickoff Game Break Down',
-        description: 'A worksheet students can fill out to analyze a game after kick off',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Get Document',
-          href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/team-resources/tca/tca_kickoff_break_down_worksheet.pdf',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'FIRST Kickoff Worksheet',
-        description: 'A general plan for what to look for right after kick off',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Get Document',
-          href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/technical-resources/frc-kickoff-worksheet.pdf',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-    ]}
-  />
-  <Features3
-    title="Resources From Other Teams"
-    id="resources-from-other-teams"
-    subtitle="Useful team links"
-    columns={3}
-    defaultIcon="tabler:point-filled"
-    items={[
-      {
-        title: '2025 massive mini',
-        description: 'Massive mini this year. Resources are in the **ACCESS OUR SHARED DRIVE HERE** link',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://sites.google.com/lps53.org/massivemini25/home',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'Spectrum 3847',
-        description: 'Spectrum 3847 has a lot of resources that are very useful',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://www.spectrum3847.org/resources',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'FRCDesign.org',
-        description:
-          'FRC Design has a lot of useful information. Specifically a collection of FRC Designs that you can view in OnShape',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://www.frcdesign.org/mechanism-examples/',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-    ]}
-  />
-  <Features3
-    title="Programming Resources"
-    id="programming-resources"
-    subtitle="Useful links for programmers as well as libraries we find useful"
-    columns={3}
-    defaultIcon="tabler:point-filled"
-    items={[
-      {
-        title: 'FIRST Robotics Competition Control System',
-        description:
-          'FIRST® Robotics Competition Control System Documentation! This site contains everything you need to know for programming a competition robot! Note: we use the Java programming language.',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://docs.wpilib.org/en/stable/index.html',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'Rev Robotics C++ and Java Installation/Docs',
-        description:
-          'A good resource for rev robotics docs. Link takes you to where you can get the url to install the library for development.',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://docs.revrobotics.com/ion-control-system/sw/revlib#c-and-java-installation',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'CTRE Phoenix Software',
-        description: 'Documentation and download links for CTRE devices like Kraken x60.',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://docs.ctr-electronics.com/',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'Yet Another Generic Swerve Library(YAGSL)',
-        description: 'We used this library in the offseason of 2024 allowing us to implement swerve with ease.',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://yagsl.gitbook.io/yagsl',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-      {
-        title: 'Path Planner',
-        description: 'Useful tool for making auto paths easier to implement through a GUI.',
-        callToAction: {
-          variant: 'secondary',
-          text: 'Visit Website',
-          href: 'https://pathplanner.dev/home.html',
-          target: '_blank',
-          icon: 'tabler:link',
-        },
-      },
-    ]}
-  />
+  <!-- Parts -->
   <Features3
     title="Parts"
     id="parts"
@@ -417,6 +233,217 @@ const pdfUrl = pdfs['/src/assets/pdf/WRATH-1847-Sponsor-Packet-2025.pdf'].defaul
       },
     ]}
   />
+  <!-- Programming Resources -->
+  <Features3
+    title="Programming Resources"
+    id="programming-resources"
+    subtitle="Useful links for programmers as well as libraries we find useful"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'FIRST Robotics Competition Control System',
+        description:
+          'FIRST® Robotics Competition Control System Documentation! This site contains everything you need to know for programming a competition robot! Note: we use the Java programming language.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://docs.wpilib.org/en/stable/index.html',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Rev Robotics C++ and Java Installation/Docs',
+        description:
+          'A good resource for rev robotics docs. Link takes you to where you can get the url to install the library for development.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://docs.revrobotics.com/ion-control-system/sw/revlib#c-and-java-installation',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'CTRE Phoenix Software',
+        description: 'Documentation and download links for CTRE devices like Kraken x60.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://docs.ctr-electronics.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Yet Another Generic Swerve Library(YAGSL)',
+        description: 'We used this library in the offseason of 2024 allowing us to implement swerve with ease.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://yagsl.gitbook.io/yagsl',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'YAGSL configuration worksheet',
+        description: 'Quick link to the configuration of YAGSL worksheet',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://docs.yagsl.com/bringing-up-swerve/creating-your-first-configuration',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Path Planner',
+        description: 'Useful tool for making auto paths easier to implement through a GUI.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://pathplanner.dev/home.html',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Grapple Robotics LaserCAN Docs',
+        description: 'Docs for LaserCAN integration with FRC',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://grapplerobotics.au/product/lasercan/?_amc-currency=USD',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+    ]}
+  />
+  <!-- Competition Resources -->
+  <Features3
+    title="Competition Resources"
+    id="competition-resources"
+    subtitle="Useful links during the build and competitions season"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'The Blue Alliance',
+        description: 'The Blue Alliance provides event, team, and ranking information for FRC',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://thebluealliance.com',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Statbotics.io',
+        description: 'Provides ranking information for all teams based off Expected Points Added (EPA)',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.statbotics.io/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Chief Delphi',
+        description:
+          'Main online forum for the FIRST Robotics Competition (FRC) community. It serves as a central hub for discussion, collaboration, support, and announcements related to FRC teams, events, and technical topics.',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.chiefdelphi.com/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'FIRST Build Season Timeline',
+        description: 'A timeline for how teams should plan their build season',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Get Document',
+          href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/team-resources/build_season_timeline_11x17.pdf',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'FIRST Kickoff Game Break Down',
+        description: 'A worksheet students can fill out to analyze a game after kick off',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Get Document',
+          href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/team-resources/tca/tca_kickoff_break_down_worksheet.pdf',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'FIRST Kickoff Worksheet',
+        description: 'A general plan for what to look for right after kick off',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Get Document',
+          href: 'https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/technical-resources/frc-kickoff-worksheet.pdf',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+    ]}
+  />
+  <!-- Other Teams -->
+  <Features3
+    title="Resources From Other Teams"
+    id="resources-from-other-teams"
+    subtitle="Useful team links"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: '2025 massive mini',
+        description: 'Massive mini this year. Resources are in the **ACCESS OUR SHARED DRIVE HERE** link',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://sites.google.com/lps53.org/massivemini25/home',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'Spectrum 3847',
+        description: 'Spectrum 3847 has a lot of resources that are very useful',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.spectrum3847.org/resources',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+      {
+        title: 'FRCDesign.org',
+        description:
+          'FRC Design has a lot of useful information. Specifically a collection of FRC Designs that you can view in OnShape',
+        callToAction: {
+          variant: 'secondary',
+          text: 'Visit Website',
+          href: 'https://www.frcdesign.org/mechanism-examples/',
+          target: '_blank',
+          icon: 'tabler:link',
+        },
+      },
+    ]}
+  />
+
   <div
     id="backToTop"
     class="hidden fixed bottom-6 right-6 z-50 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 shadow-md rounded-full px-4 py-2 text-sm text-primary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"

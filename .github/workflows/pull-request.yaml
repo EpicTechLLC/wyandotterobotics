@@ -1,4 +1,4 @@
-name: Build and Deploy Wyandotte Robotics Site
+name: Build Wyandotte Robotics Site
 
 on:
     pull_request:
