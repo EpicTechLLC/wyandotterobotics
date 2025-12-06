@@ -25,9 +25,6 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   output: 'server',
-  experimental: {
-    contentCollectionCache: true, // Enable Incremental Content Caching
-  },
   build: {
     concurrency: 8,
   },
