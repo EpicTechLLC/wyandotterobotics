@@ -6,6 +6,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=4321
+    restart: unless-stopped
 
   imgproxy:
     image: ghcr.io/imgproxy/imgproxy:latest
@@ -14,3 +15,4 @@ services:
       - ./src/content/albums:/data/albums:ro
     ports:
       - '8080:8080'
+    restart: unless-stopped
