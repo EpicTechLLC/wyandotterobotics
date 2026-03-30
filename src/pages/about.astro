@@ -38,12 +38,12 @@ const metadata = {
   <Stats
     title="Quick Facts About Us"
     stats={[
-      { title: 'Regionals', amount: 22 },
-      { title: 'Seasons Competed', amount: new Date().getFullYear() - 2006 },
+      { title: 'Regionals', amount: 24 },
+      { title: 'Seasons Competed', amount: new Date().getFullYear() - 2006 + 1 },
       { title: 'Off season events', amount: 8 },
       { title: 'Sponsors', amount: 5 },
-      { title: 'Mentors', amount: '4' },
-      { title: 'Regional Finalist', amount: '2x' },
+      { title: 'Mentors', amount: 4 },
+      { title: 'Regional Finalist', amount: '3x' },
     ]}
   />
 
@@ -93,6 +93,12 @@ const metadata = {
     tagline="Celebrating our success"
     columns={3}
     items={[
+      {
+        title: 'Regional Finalists - 2026 Heartland Regional',
+        description:
+          'Competed at the Heartland Regional in Shawnee, KS as the second pick of Alliance 4, alongside captain 9126 and 5801.',
+        icon: 'tabler:award',
+      },
       {
         title: 'Regional Finalists - 2025 Heartland Regional',
         description:
