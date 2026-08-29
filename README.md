@@ -13,7 +13,7 @@
 
 ## Website
 
-📌 [https://wyandotterobotics.epictech.app/](https://wyandotterobotics.epictech.app/)
+📌 [https://wyandotterobotics.org/](https://wyandotterobotics.org/)
 
 ## Getting started
 

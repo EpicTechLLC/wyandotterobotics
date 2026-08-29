@@ -1,6 +1,6 @@
 site:
   name: Wyandotte Robotics
-  site: "https://wyandotterobotics.epictech.app"
+  site: "https://wyandotterobotics.org"
   base: "/"
   trailingSlash: false
 
